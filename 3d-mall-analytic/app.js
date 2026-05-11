@@ -61,7 +61,7 @@
 
   async function loadData() {
     try {
-      const response = await fetch('data/mall-data.json', { cache: 'no-store' });
+      const response = await fetch('mall-data.json', { cache: 'no-store' });
       if (!response.ok) throw new Error('Could not load JSON');
       return await response.json();
     } catch (error) {
