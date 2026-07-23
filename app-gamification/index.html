@@ -1,0 +1,2149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Field Quest Bilingual</title>
+<style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit}iframe{display:block;width:100%;max-width:736px;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
+</head>
+<body>
+<iframe sandbox="allow-scripts" referrerpolicy="no-referrer" title="Field Quest Bilingual" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#x27;none&#x27;; script-src &#x27;unsafe-inline&#x27; &#x27;unsafe-eval&#x27; &#x27;wasm-unsafe-eval&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src &#x27;unsafe-inline&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;&quot;&gt;
+&lt;title&gt;Field Quest Bilingual&lt;/title&gt;
+&lt;style&gt;:root {
+  color-scheme: light dark;
+  background-color: var(--background) !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: light-dark(rgb(255 255 255), rgb(24 24 24));
+  --foreground: light-dark(rgb(26 28 31), rgb(255 255 255));
+  --card: color-mix(in oklab, var(--foreground) 5%, transparent);
+  --card-foreground: var(--foreground);
+  --popover: light-dark(rgb(255 255 255), rgb(45 45 45));
+  --popover-foreground: var(--foreground);
+  --primary: light-dark(rgb(51 156 255), rgb(131 195 255));
+  --primary-foreground: light-dark(rgb(255 255 255), rgb(13 13 13));
+  --secondary: light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%));
+  --secondary-foreground: var(--foreground);
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: light-dark(
+    rgb(26 28 31 / 49.4%),
+    rgb(255 255 255 / 49.8%)
+  );
+  --accent: light-dark(rgb(229 242 255), rgb(13 39 63));
+  --accent-foreground: var(--primary);
+  --destructive: light-dark(rgb(226 85 7), rgb(255 133 73));
+  --border: light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%));
+  --input: light-dark(
+    rgb(26 28 31 / 11.8%),
+    color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+  );
+  --ring: light-dark(rgb(51 156 255), rgb(131 195 255 / 76%));
+  --font-size-base: 14px;
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(rgb(243 136 59), rgb(245 154 86));
+  --viz-series-3: light-dark(rgb(93 201 119), rgb(116 213 139));
+  --viz-series-4: light-dark(rgb(235 119 177), rgb(240 143 192));
+  --viz-series-5: light-dark(rgb(155 121 236), rgb(170 145 239));
+  --viz-series-6: light-dark(rgb(58 185 177), rgb(90 203 194));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, &quot;Segoe UI&quot;, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, &quot;SF Mono&quot;, Menlo, Consolas, &quot;Liberation Mono&quot;,
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --radius: 12.5px;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url(&quot;data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 17 17&#x27;%3E%3Cpath d=&#x27;M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z&#x27;/%3E%3C/svg%3E&quot;);
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+  --color-background-primary: var(--background);
+  --color-text-primary: var(--foreground);
+  --color-border-secondary: var(--border);
+}
+
+:root[data-theme=&quot;light&quot;] {
+  color-scheme: light;
+}
+
+:root[data-theme=&quot;dark&quot;] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html &gt; body {
+  margin: 0;
+  padding: 5px;
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: pointer;
+  font-weight: var(--viz-font-weight-medium);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  corner-shape: superellipse(1.5);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  corner-shape: superellipse(1.5);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+#widget &gt; :not(.card) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls &gt; .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls &gt; .form-label &gt; :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: padding-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type=&quot;file&quot;] {
+  padding: 0;
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control[type=&quot;file&quot;]::file-selector-button {
+  min-height: 26px;
+  margin-right: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+}
+
+.form-control[type=&quot;file&quot;]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type=&quot;color&quot;] {
+  width: 40px;
+  height: 28px;
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+  corner-shape: superellipse(1.5);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  corner-shape: superellipse(1.5);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type=&quot;checkbox&quot;]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: &quot;&quot;;
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type=&quot;radio&quot;] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type=&quot;radio&quot;]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: &quot;&quot;;
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+    [aria-pressed=&quot;true&quot;],
+    [aria-selected=&quot;true&quot;],
+    .is-selected
+  ) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed=&quot;true&quot;], [aria-selected=&quot;true&quot;], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget &gt; svg {
+  width: 100%;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html&gt;body{padding:0}&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;field-quest-android&quot;&gt;
+  &lt;style&gt;
+    #field-quest-android {
+      --fq-positive: var(--viz-series-2);
+      --fq-warning: var(--viz-series-3);
+      color: var(--foreground);
+      display: grid;
+      place-items: start center;
+      width: 100%;
+    }
+
+    #field-quest-android * {
+      box-sizing: border-box;
+    }
+
+    #field-quest-android .fq-phone {
+      width: min(100%, 420px);
+      background: var(--background);
+      color: var(--foreground);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 18px 45px color-mix(in srgb, var(--foreground) 12%, transparent);
+    }
+
+    #field-quest-android .fq-statusbar,
+    #field-quest-android .fq-appbar,
+    #field-quest-android .fq-section-head,
+    #field-quest-android .fq-list-row,
+    #field-quest-android .fq-person,
+    #field-quest-android .fq-nav,
+    #field-quest-android .fq-inline,
+    #field-quest-android .fq-chart-labels,
+    #field-quest-android .fq-points-row {
+      display: flex;
+      align-items: center;
+    }
+
+    #field-quest-android .fq-statusbar,
+    #field-quest-android .fq-appbar,
+    #field-quest-android .fq-section-head,
+    #field-quest-android .fq-list-row,
+    #field-quest-android .fq-chart-labels,
+    #field-quest-android .fq-points-row {
+      justify-content: space-between;
+    }
+
+    #field-quest-android .fq-statusbar {
+      padding: 10px 20px 6px;
+    }
+
+    #field-quest-android .fq-status-icons {
+      display: flex;
+      gap: 7px;
+    }
+
+    #field-quest-android .fq-status-icons svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    #field-quest-android .fq-appbar {
+      padding: 10px 18px 16px;
+    }
+
+    #field-quest-android .fq-brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    #field-quest-android .fq-brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      color: var(--primary-foreground);
+      background:
+        radial-gradient(circle at 35% 50%, var(--viz-series-3) 0 14%, transparent 15%),
+        radial-gradient(circle at 65% 50%, var(--viz-series-1) 0 14%, transparent 15%),
+        var(--primary);
+    }
+
+    #field-quest-android .fq-profile {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--secondary);
+      color: var(--secondary-foreground);
+      border: 1px solid var(--border);
+    }
+
+    #field-quest-android .fq-app-actions,
+    #field-quest-android .fq-language {
+      display: flex;
+      align-items: center;
+    }
+
+    #field-quest-android .fq-app-actions {
+      gap: 8px;
+    }
+
+    #field-quest-android .fq-language {
+      gap: 3px;
+    }
+
+    #field-quest-android .fq-content {
+      padding: 0 16px 18px;
+    }
+
+    #field-quest-android .fq-screen[hidden] {
+      display: none;
+    }
+
+    #field-quest-android .fq-screen {
+      display: grid;
+      gap: 14px;
+    }
+
+    #field-quest-android h2,
+    #field-quest-android h3,
+    #field-quest-android p {
+      margin: 0;
+    }
+
+    #field-quest-android .fq-muted {
+      color: var(--muted-foreground);
+    }
+
+    #field-quest-android .fq-hero {
+      padding: 18px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      background:
+        linear-gradient(135deg, color-mix(in srgb, var(--viz-series-1) 18%, var(--card)), var(--card));
+    }
+
+    #field-quest-android .fq-kicker {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    #field-quest-android .fq-ring {
+      width: 92px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: conic-gradient(var(--viz-series-1) 0 95%, var(--muted) 95% 100%);
+      position: relative;
+    }
+
+    #field-quest-android .fq-ring::after {
+      content: &quot;&quot;;
+      position: absolute;
+      inset: 9px;
+      border-radius: 50%;
+      background: var(--card);
+    }
+
+    #field-quest-android .fq-ring-value {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    #field-quest-android .fq-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+    }
+
+    #field-quest-android .fq-mini-card {
+      padding: 13px 10px;
+      text-align: center;
+    }
+
+    #field-quest-android .fq-mini-card svg {
+      color: var(--viz-series-1);
+      margin-bottom: 5px;
+    }
+
+    #field-quest-android .fq-section-head {
+      gap: 12px;
+    }
+
+    #field-quest-android .fq-activity-card,
+    #field-quest-android .fq-challenge,
+    #field-quest-android .fq-quality,
+    #field-quest-android .fq-points-card {
+      padding: 16px;
+    }
+
+    #field-quest-android .fq-bars {
+      height: 120px;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      align-items: end;
+      gap: 8px;
+      padding-top: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    #field-quest-android .fq-bar-wrap {
+      height: 100%;
+      display: flex;
+      align-items: end;
+      justify-content: center;
+    }
+
+    #field-quest-android .fq-bar {
+      width: min(24px, 72%);
+      min-height: 4px;
+      border-radius: 7px 7px 2px 2px;
+      background: var(--viz-series-1);
+      position: relative;
+    }
+
+    #field-quest-android .fq-bar.is-zero {
+      background: var(--muted);
+    }
+
+    #field-quest-android .fq-bar::before {
+      content: attr(data-value);
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 5px);
+      transform: translateX(-50%);
+      color: var(--muted-foreground);
+    }
+
+    #field-quest-android .fq-chart-labels {
+      padding-top: 7px;
+    }
+
+    #field-quest-android .fq-chart-labels span {
+      width: calc(100% / 7);
+      text-align: center;
+    }
+
+    #field-quest-android .fq-progress {
+      height: 8px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: var(--muted);
+      margin: 10px 0 8px;
+    }
+
+    #field-quest-android .fq-progress &gt; span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--viz-series-1);
+    }
+
+    #field-quest-android .fq-segmented {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      padding: 4px;
+      background: var(--muted);
+      border-radius: 12px;
+    }
+
+    #field-quest-android .fq-segmented .btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    #field-quest-android .fq-podium {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      align-items: end;
+      gap: 8px;
+      padding-top: 8px;
+    }
+
+    #field-quest-android .fq-podium-person {
+      text-align: center;
+      display: grid;
+      justify-items: center;
+      gap: 6px;
+    }
+
+    #field-quest-android .fq-medal {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--secondary);
+      color: var(--secondary-foreground);
+      border: 3px solid var(--border);
+    }
+
+    #field-quest-android .fq-podium-person.is-first .fq-medal {
+      width: 66px;
+      height: 66px;
+      background: color-mix(in srgb, var(--viz-series-3) 28%, var(--card));
+      border-color: var(--viz-series-3);
+    }
+
+    #field-quest-android .fq-rank {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--muted);
+      color: var(--muted-foreground);
+      flex: 0 0 auto;
+    }
+
+    #field-quest-android .fq-list {
+      display: grid;
+      gap: 3px;
+    }
+
+    #field-quest-android .fq-list-row {
+      padding: 11px 4px;
+      border-bottom: 1px solid var(--border);
+      gap: 10px;
+    }
+
+    #field-quest-android .fq-list-row:last-child {
+      border-bottom: 0;
+    }
+
+    #field-quest-android .fq-list-row.is-me {
+      background: var(--accent);
+      color: var(--accent-foreground);
+      border-radius: 12px;
+      padding-inline: 10px;
+      border-bottom-color: transparent;
+    }
+
+    #field-quest-android .fq-person {
+      min-width: 0;
+      gap: 9px;
+      flex: 1;
+    }
+
+    #field-quest-android .fq-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--secondary);
+      color: var(--secondary-foreground);
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+    }
+
+    #field-quest-android .fq-person-copy {
+      min-width: 0;
+    }
+
+    #field-quest-android .fq-person-copy &gt; div:first-child {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    #field-quest-android .fq-points {
+      text-align: right;
+      flex: 0 0 auto;
+    }
+
+    #field-quest-android .fq-quality-grid {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+
+    #field-quest-android .fq-quality-ring {
+      width: 92px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: conic-gradient(var(--fq-positive) 0 100%, var(--muted) 100%);
+      position: relative;
+    }
+
+    #field-quest-android .fq-quality-ring::after {
+      content: &quot;&quot;;
+      position: absolute;
+      inset: 10px;
+      border-radius: 50%;
+      background: var(--card);
+    }
+
+    #field-quest-android .fq-quality-ring span {
+      position: relative;
+      z-index: 1;
+    }
+
+    #field-quest-android .fq-checks {
+      display: grid;
+      gap: 9px;
+    }
+
+    #field-quest-android .fq-check {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    #field-quest-android .fq-check svg {
+      color: var(--fq-positive);
+      flex: 0 0 auto;
+    }
+
+    #field-quest-android .fq-badge-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    #field-quest-android .fq-achievement {
+      padding: 15px;
+      text-align: center;
+      min-height: 132px;
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 7px;
+    }
+
+    #field-quest-android .fq-achievement.is-locked {
+      opacity: .55;
+    }
+
+    #field-quest-android .fq-achievement-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: color-mix(in srgb, var(--viz-series-3) 22%, var(--card));
+      color: var(--foreground);
+    }
+
+    #field-quest-android .fq-challenge-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+    }
+
+    #field-quest-android .fq-challenge-head svg {
+      color: var(--viz-series-1);
+      flex: 0 0 auto;
+    }
+
+    #field-quest-android .fq-points-card {
+      display: grid;
+      gap: 11px;
+    }
+
+    #field-quest-android .fq-points-row {
+      gap: 10px;
+    }
+
+    #field-quest-android .fq-rule-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      color: var(--secondary-foreground);
+      background: var(--secondary);
+      flex: 0 0 auto;
+    }
+
+    #field-quest-android .fq-rule-copy {
+      flex: 1;
+    }
+
+    #field-quest-android .fq-nav {
+      border-top: 1px solid var(--border);
+      padding: 8px 7px 10px;
+      justify-content: space-around;
+      background: var(--background);
+    }
+
+    #field-quest-android .fq-nav .btn {
+      min-width: 0;
+      flex: 1;
+      display: grid;
+      justify-items: center;
+      gap: 3px;
+      padding-inline: 4px;
+    }
+
+    #field-quest-android .fq-inline {
+      gap: 6px;
+    }
+
+    #field-quest-android .fq-success {
+      color: var(--fq-positive);
+    }
+
+    @media (max-width: 360px) {
+      #field-quest-android .fq-content {
+        padding-inline: 12px;
+      }
+
+      #field-quest-android .fq-hero {
+        grid-template-columns: 1fr;
+      }
+
+      #field-quest-android .fq-ring {
+        width: 84px;
+      }
+
+      #field-quest-android .fq-quality-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  &lt;/style&gt;
+
+  &lt;section class=&quot;fq-phone&quot; lang=&quot;es&quot; aria-label=&quot;Prototipo Android de gamificación para encuestadores de campo&quot;&gt;
+    &lt;div class=&quot;fq-statusbar text-small&quot;&gt;
+      &lt;span&gt;09:41&lt;/span&gt;
+      &lt;div class=&quot;fq-status-icons&quot; aria-hidden=&quot;true&quot;&gt;
+        &lt;i data-lucide=&quot;signal&quot;&gt;&lt;/i&gt;
+        &lt;i data-lucide=&quot;wifi&quot;&gt;&lt;/i&gt;
+        &lt;i data-lucide=&quot;battery-full&quot;&gt;&lt;/i&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;header class=&quot;fq-appbar&quot;&gt;
+      &lt;div class=&quot;fq-brand&quot;&gt;
+        &lt;span class=&quot;fq-brand-mark&quot; aria-hidden=&quot;true&quot;&gt;&lt;i data-lucide=&quot;zap&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+        &lt;div&gt;
+          &lt;div class=&quot;text-small fq-muted&quot;&gt;FIELD QUEST&lt;/div&gt;
+          &lt;div id=&quot;fq-page-title&quot;&gt;Mi jornada&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;fq-app-actions&quot;&gt;
+        &lt;div class=&quot;fq-language&quot; aria-label=&quot;Idioma de la aplicación&quot;&gt;
+          &lt;button class=&quot;btn is-selected&quot; type=&quot;button&quot; data-language=&quot;es&quot; aria-label=&quot;Ver demostración en español&quot; aria-pressed=&quot;true&quot;&gt;ES&lt;/button&gt;
+          &lt;button class=&quot;btn&quot; type=&quot;button&quot; data-language=&quot;en&quot; aria-label=&quot;Ver demostración en inglés&quot; aria-pressed=&quot;false&quot;&gt;EN&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;span class=&quot;fq-profile&quot; aria-label=&quot;Perfil de Grediel Mery&quot;&gt;GM&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/header&gt;
+
+    &lt;main class=&quot;fq-content&quot;&gt;
+      &lt;section class=&quot;fq-screen&quot; id=&quot;fq-home&quot; data-title=&quot;Mi jornada&quot;&gt;
+        &lt;div&gt;
+          &lt;h2&gt;Hola, Grediel&lt;/h2&gt;
+          &lt;p class=&quot;fq-muted&quot;&gt;Lunes 13 de julio · último día con datos&lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;article class=&quot;card fq-hero&quot;&gt;
+          &lt;div&gt;
+            &lt;div class=&quot;fq-kicker text-small&quot;&gt;
+              &lt;i data-lucide=&quot;sparkles&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;
+              &lt;span&gt;Meta diaria&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;h3&gt;Te falta 1 visita&lt;/h3&gt;
+            &lt;p class=&quot;fq-muted&quot;&gt;19 de 20 tiendas completadas&lt;/p&gt;
+            &lt;div class=&quot;fq-inline fq-success text-small&quot; style=&quot;margin-top: 10px;&quot;&gt;
+              &lt;i data-lucide=&quot;trending-up&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;
+              &lt;span&gt;+380 puntos hoy&lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;fq-ring&quot; role=&quot;img&quot; aria-label=&quot;Progreso de meta diaria: 95 por ciento&quot;&gt;
+            &lt;div class=&quot;fq-ring-value&quot;&gt;
+              &lt;div class=&quot;viz-stat-value&quot;&gt;95%&lt;/div&gt;
+              &lt;div class=&quot;text-small fq-muted&quot;&gt;META&lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+
+        &lt;div class=&quot;fq-grid-3&quot;&gt;
+          &lt;article class=&quot;card fq-mini-card&quot;&gt;
+            &lt;i data-lucide=&quot;store&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;
+            &lt;div class=&quot;viz-stat-value&quot;&gt;19&lt;/div&gt;
+            &lt;div class=&quot;text-small fq-muted&quot;&gt;Tiendas&lt;/div&gt;
+          &lt;/article&gt;
+          &lt;article class=&quot;card fq-mini-card&quot;&gt;
+            &lt;i data-lucide=&quot;shield-check&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;
+            &lt;div class=&quot;viz-stat-value&quot;&gt;100%&lt;/div&gt;
+            &lt;div class=&quot;text-small fq-muted&quot;&gt;Aceptadas&lt;/div&gt;
+          &lt;/article&gt;
+          &lt;article class=&quot;card fq-mini-card&quot;&gt;
+            &lt;i data-lucide=&quot;map-pin-check&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;
+            &lt;div class=&quot;viz-stat-value&quot;&gt;100%&lt;/div&gt;
+            &lt;div class=&quot;text-small fq-muted&quot;&gt;Con GPS&lt;/div&gt;
+          &lt;/article&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;fq-section-head&quot;&gt;
+          &lt;div&gt;
+            &lt;h3&gt;Últimos 7 días&lt;/h3&gt;
+            &lt;p class=&quot;text-small fq-muted&quot;&gt;86 tiendas únicas · 6 días activos&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;span class=&quot;viz-badge&quot;&gt;#2 equipo&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;article class=&quot;card fq-activity-card&quot;&gt;
+          &lt;div class=&quot;fq-bars&quot; role=&quot;img&quot; aria-label=&quot;Visitas de Grediel del 7 al 13 de julio: 11, 23, 24, 1, 8, 0 y 19&quot;&gt;
+            &lt;div class=&quot;fq-bar-wrap&quot;&gt;&lt;span class=&quot;fq-bar&quot; data-value=&quot;11&quot; style=&quot;height:46%&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;fq-bar-wrap&quot;&gt;&lt;span class=&quot;fq-bar&quot; data-value=&quot;23&quot; style=&quot;height:96%&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;fq-bar-wrap&quot;&gt;&lt;span class=&quot;fq-bar&quot; data-value=&quot;24&quot; style=&quot;height:100%&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;fq-bar-wrap&quot;&gt;&lt;span class=&quot;fq-bar&quot; data-value=&quot;1&quot; style=&quot;height:8%&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;fq-bar-wrap&quot;&gt;&lt;span class=&quot;fq-bar&quot; data-value=&quot;8&quot; style=&quot;height:33%&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;fq-bar-wrap&quot;&gt;&lt;span class=&quot;fq-bar is-zero&quot; data-value=&quot;0&quot; style=&quot;height:4%&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;fq-bar-wrap&quot;&gt;&lt;span class=&quot;fq-bar&quot; data-value=&quot;19&quot; style=&quot;height:79%&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;fq-chart-labels text-small fq-muted&quot; aria-hidden=&quot;true&quot;&gt;
+            &lt;span&gt;M&lt;/span&gt;&lt;span&gt;X&lt;/span&gt;&lt;span&gt;J&lt;/span&gt;&lt;span&gt;V&lt;/span&gt;&lt;span&gt;S&lt;/span&gt;&lt;span&gt;D&lt;/span&gt;&lt;span&gt;L&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+
+        &lt;article class=&quot;card fq-challenge&quot;&gt;
+          &lt;div class=&quot;fq-challenge-head&quot;&gt;
+            &lt;i data-lucide=&quot;target&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;
+            &lt;div&gt;
+              &lt;h3&gt;Reto “Cobertura total”&lt;/h3&gt;
+              &lt;p class=&quot;text-small fq-muted&quot;&gt;Visita 100 tiendas únicas con evidencia completa&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;fq-progress&quot; role=&quot;progressbar&quot; aria-valuemin=&quot;0&quot; aria-valuemax=&quot;100&quot; aria-valuenow=&quot;86&quot;&gt;
+            &lt;span style=&quot;width:86%&quot;&gt;&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;fq-section-head text-small&quot;&gt;
+            &lt;span&gt;86 / 100&lt;/span&gt;
+            &lt;span class=&quot;fq-muted&quot;&gt;+250 pts al completar&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+      &lt;/section&gt;
+
+      &lt;section class=&quot;fq-screen&quot; id=&quot;fq-ranking&quot; data-title=&quot;Ranking&quot; hidden&gt;
+        &lt;div&gt;
+          &lt;h2&gt;Liga de campo&lt;/h2&gt;
+          &lt;p class=&quot;fq-muted&quot;&gt;Campaña “Sondeo de Presencia de Marcas”&lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;fq-segmented&quot; aria-label=&quot;Periodo del ranking&quot;&gt;
+          &lt;button class=&quot;btn is-selected&quot; type=&quot;button&quot; data-range=&quot;week&quot; aria-pressed=&quot;true&quot;&gt;7 días&lt;/button&gt;
+          &lt;button class=&quot;btn&quot; type=&quot;button&quot; data-range=&quot;month&quot; aria-pressed=&quot;false&quot;&gt;Julio&lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;fq-podium&quot; aria-label=&quot;Tres primeros del ranking&quot;&gt;
+          &lt;div class=&quot;fq-podium-person&quot;&gt;
+            &lt;div class=&quot;fq-medal&quot; data-podium-initials=&quot;third&quot;&gt;FA&lt;/div&gt;
+            &lt;div class=&quot;text-small&quot; data-podium-name=&quot;third&quot;&gt;Agente 162&lt;/div&gt;
+            &lt;div class=&quot;text-small fq-muted&quot; data-podium-points=&quot;third&quot;&gt;1.460 pts&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;fq-podium-person is-first&quot;&gt;
+            &lt;div class=&quot;fq-medal&quot; data-podium-initials=&quot;first&quot;&gt;CC&lt;/div&gt;
+            &lt;div class=&quot;text-small&quot; data-podium-name=&quot;first&quot;&gt;Carlos&lt;/div&gt;
+            &lt;div class=&quot;text-small fq-muted&quot; data-podium-points=&quot;first&quot;&gt;2.919 pts&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;fq-podium-person&quot;&gt;
+            &lt;div class=&quot;fq-medal&quot; data-podium-initials=&quot;second&quot;&gt;GM&lt;/div&gt;
+            &lt;div class=&quot;text-small&quot; data-podium-name=&quot;second&quot;&gt;Grediel&lt;/div&gt;
+            &lt;div class=&quot;text-small fq-muted&quot; data-podium-points=&quot;second&quot;&gt;1.720 pts&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;fq-list&quot; id=&quot;fq-leader-list&quot; aria-live=&quot;polite&quot;&gt;&lt;/div&gt;
+
+        &lt;button class=&quot;btn btn-block&quot; id=&quot;fq-how-points&quot; type=&quot;button&quot;&gt;
+          &lt;i data-lucide=&quot;info&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;
+          Cómo se calculan los puntos
+        &lt;/button&gt;
+      &lt;/section&gt;
+
+      &lt;section class=&quot;fq-screen&quot; id=&quot;fq-activity&quot; data-title=&quot;Actividad&quot; hidden&gt;
+        &lt;div&gt;
+          &lt;h2&gt;Tu actividad&lt;/h2&gt;
+          &lt;p class=&quot;fq-muted&quot;&gt;Datos reales del 7 al 13 de julio&lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;fq-grid-3&quot;&gt;
+          &lt;article class=&quot;card fq-mini-card&quot;&gt;
+            &lt;div class=&quot;viz-stat-value&quot;&gt;86&lt;/div&gt;
+            &lt;div class=&quot;text-small fq-muted&quot;&gt;Visitas&lt;/div&gt;
+          &lt;/article&gt;
+          &lt;article class=&quot;card fq-mini-card&quot;&gt;
+            &lt;div class=&quot;viz-stat-value&quot;&gt;86&lt;/div&gt;
+            &lt;div class=&quot;text-small fq-muted&quot;&gt;Únicas&lt;/div&gt;
+          &lt;/article&gt;
+          &lt;article class=&quot;card fq-mini-card&quot;&gt;
+            &lt;div class=&quot;viz-stat-value&quot;&gt;6&lt;/div&gt;
+            &lt;div class=&quot;text-small fq-muted&quot;&gt;Días activos&lt;/div&gt;
+          &lt;/article&gt;
+        &lt;/div&gt;
+
+        &lt;article class=&quot;card fq-activity-card&quot;&gt;
+          &lt;div class=&quot;fq-section-head&quot;&gt;
+            &lt;div&gt;
+              &lt;h3&gt;Ritmo diario&lt;/h3&gt;
+              &lt;p class=&quot;text-small fq-muted&quot;&gt;Promedio: 14,3 visitas por día activo&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;span class=&quot;viz-badge&quot;&gt;Mejor: 24&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;fq-bars&quot; role=&quot;img&quot; aria-label=&quot;Gráfico de actividad diaria con 86 visitas totales&quot;&gt;
+            &lt;div class=&quot;fq-bar-wrap&quot;&gt;&lt;span class=&quot;fq-bar&quot; data-value=&quot;11&quot; style=&quot;height:46%&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;fq-bar-wrap&quot;&gt;&lt;span class=&quot;fq-bar&quot; data-value=&quot;23&quot; style=&quot;height:96%&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;fq-bar-wrap&quot;&gt;&lt;span class=&quot;fq-bar&quot; data-value=&quot;24&quot; style=&quot;height:100%&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;fq-bar-wrap&quot;&gt;&lt;span class=&quot;fq-bar&quot; data-value=&quot;1&quot; style=&quot;height:8%&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;fq-bar-wrap&quot;&gt;&lt;span class=&quot;fq-bar&quot; data-value=&quot;8&quot; style=&quot;height:33%&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;fq-bar-wrap&quot;&gt;&lt;span class=&quot;fq-bar is-zero&quot; data-value=&quot;0&quot; style=&quot;height:4%&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;fq-bar-wrap&quot;&gt;&lt;span class=&quot;fq-bar&quot; data-value=&quot;19&quot; style=&quot;height:79%&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;fq-chart-labels text-small fq-muted&quot; aria-hidden=&quot;true&quot;&gt;
+            &lt;span&gt;7&lt;/span&gt;&lt;span&gt;8&lt;/span&gt;&lt;span&gt;9&lt;/span&gt;&lt;span&gt;10&lt;/span&gt;&lt;span&gt;11&lt;/span&gt;&lt;span&gt;12&lt;/span&gt;&lt;span&gt;13&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+
+        &lt;article class=&quot;card fq-quality&quot;&gt;
+          &lt;div class=&quot;fq-section-head&quot; style=&quot;margin-bottom: 14px;&quot;&gt;
+            &lt;div&gt;
+              &lt;h3&gt;Calidad de evidencia&lt;/h3&gt;
+              &lt;p class=&quot;text-small fq-muted&quot;&gt;Evita premiar solo la velocidad&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;fq-quality-grid&quot;&gt;
+            &lt;div class=&quot;fq-quality-ring&quot; role=&quot;img&quot; aria-label=&quot;Calidad de evidencia 100 por ciento&quot;&gt;
+              &lt;span class=&quot;viz-stat-value&quot;&gt;100%&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;fq-checks&quot;&gt;
+              &lt;div class=&quot;fq-check&quot;&gt;&lt;i data-lucide=&quot;check-circle-2&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;86 aceptadas&lt;/span&gt;&lt;/div&gt;
+              &lt;div class=&quot;fq-check&quot;&gt;&lt;i data-lucide=&quot;map-pin-check&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;86 con GPS&lt;/span&gt;&lt;/div&gt;
+              &lt;div class=&quot;fq-check&quot;&gt;&lt;i data-lucide=&quot;camera&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;86 con foto&lt;/span&gt;&lt;/div&gt;
+              &lt;div class=&quot;fq-check&quot;&gt;&lt;i data-lucide=&quot;store&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;86 tiendas únicas&lt;/span&gt;&lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+
+        &lt;article class=&quot;card fq-challenge&quot;&gt;
+          &lt;div class=&quot;fq-section-head&quot;&gt;
+            &lt;div&gt;
+              &lt;h3&gt;Comparación semanal&lt;/h3&gt;
+              &lt;p class=&quot;text-small fq-muted&quot;&gt;Semana completa anterior&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;span class=&quot;viz-badge&quot;&gt;+5%&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;fq-progress&quot; aria-label=&quot;86 visitas frente a 78 de la semana anterior&quot;&gt;
+            &lt;span style=&quot;width:91%&quot;&gt;&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;p class=&quot;text-small fq-muted&quot;&gt;86 en los últimos 7 días · 78 en la semana anterior&lt;/p&gt;
+        &lt;/article&gt;
+      &lt;/section&gt;
+
+      &lt;section class=&quot;fq-screen&quot; id=&quot;fq-rewards&quot; data-title=&quot;Logros&quot; hidden&gt;
+        &lt;div&gt;
+          &lt;h2&gt;Retos y logros&lt;/h2&gt;
+          &lt;p class=&quot;fq-muted&quot;&gt;Reconoce cobertura y calidad, no solo volumen&lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;article class=&quot;card fq-challenge&quot;&gt;
+          &lt;div class=&quot;fq-section-head&quot;&gt;
+            &lt;div class=&quot;fq-challenge-head&quot;&gt;
+              &lt;i data-lucide=&quot;trophy&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;
+              &lt;div&gt;
+                &lt;h3&gt;Reto semanal&lt;/h3&gt;
+                &lt;p class=&quot;text-small fq-muted&quot;&gt;100 tiendas únicas con GPS + foto&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;span class=&quot;viz-badge&quot;&gt;4 días&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;fq-progress&quot; role=&quot;progressbar&quot; aria-valuemin=&quot;0&quot; aria-valuemax=&quot;100&quot; aria-valuenow=&quot;86&quot;&gt;
+            &lt;span style=&quot;width:86%&quot;&gt;&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;fq-section-head text-small&quot;&gt;
+            &lt;span&gt;86 / 100&lt;/span&gt;
+            &lt;span&gt;Premio: 250 pts&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+
+        &lt;div class=&quot;fq-section-head&quot;&gt;
+          &lt;h3&gt;Insignias&lt;/h3&gt;
+          &lt;span class=&quot;text-small fq-muted&quot;&gt;3 de 4&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;fq-badge-grid&quot;&gt;
+          &lt;article class=&quot;card fq-achievement&quot;&gt;
+            &lt;span class=&quot;fq-achievement-icon&quot;&gt;&lt;i data-lucide=&quot;map&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+            &lt;h3&gt;Explorador&lt;/h3&gt;
+            &lt;p class=&quot;text-small fq-muted&quot;&gt;50 tiendas únicas&lt;/p&gt;
+            &lt;span class=&quot;viz-badge&quot;&gt;Ganada&lt;/span&gt;
+          &lt;/article&gt;
+          &lt;article class=&quot;card fq-achievement&quot;&gt;
+            &lt;span class=&quot;fq-achievement-icon&quot;&gt;&lt;i data-lucide=&quot;badge-check&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+            &lt;h3&gt;Evidencia pro&lt;/h3&gt;
+            &lt;p class=&quot;text-small fq-muted&quot;&gt;100% GPS + foto&lt;/p&gt;
+            &lt;span class=&quot;viz-badge&quot;&gt;Ganada&lt;/span&gt;
+          &lt;/article&gt;
+          &lt;article class=&quot;card fq-achievement&quot;&gt;
+            &lt;span class=&quot;fq-achievement-icon&quot;&gt;&lt;i data-lucide=&quot;calendar-check&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+            &lt;h3&gt;Constante&lt;/h3&gt;
+            &lt;p class=&quot;text-small fq-muted&quot;&gt;6 días activos&lt;/p&gt;
+            &lt;span class=&quot;viz-badge&quot;&gt;Ganada&lt;/span&gt;
+          &lt;/article&gt;
+          &lt;article class=&quot;card fq-achievement is-locked&quot;&gt;
+            &lt;span class=&quot;fq-achievement-icon&quot;&gt;&lt;i data-lucide=&quot;lock&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+            &lt;h3&gt;Cobertura 100&lt;/h3&gt;
+            &lt;p class=&quot;text-small fq-muted&quot;&gt;Faltan 14 tiendas&lt;/p&gt;
+            &lt;span class=&quot;viz-badge&quot;&gt;86%&lt;/span&gt;
+          &lt;/article&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+
+      &lt;section class=&quot;fq-screen&quot; id=&quot;fq-points&quot; data-title=&quot;Puntos justos&quot; hidden&gt;
+        &lt;div&gt;
+          &lt;h2&gt;Cómo ganas puntos&lt;/h2&gt;
+          &lt;p class=&quot;fq-muted&quot;&gt;Reglas simples que ya pueden calcularse con Results, Answers y Galleries&lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;article class=&quot;card fq-points-card&quot;&gt;
+          &lt;div class=&quot;fq-points-row&quot;&gt;
+            &lt;span class=&quot;fq-rule-icon&quot;&gt;&lt;i data-lucide=&quot;shield-check&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+            &lt;div class=&quot;fq-rule-copy&quot;&gt;
+              &lt;div&gt;Visita aceptada&lt;/div&gt;
+              &lt;div class=&quot;text-small fq-muted&quot;&gt;Solo resultados con status = 2&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;span&gt;+10&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;fq-points-row&quot;&gt;
+            &lt;span class=&quot;fq-rule-icon&quot;&gt;&lt;i data-lucide=&quot;store&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+            &lt;div class=&quot;fq-rule-copy&quot;&gt;
+              &lt;div&gt;Tienda única&lt;/div&gt;
+              &lt;div class=&quot;text-small fq-muted&quot;&gt;No premia repeticiones&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;span&gt;+5&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;fq-points-row&quot;&gt;
+            &lt;span class=&quot;fq-rule-icon&quot;&gt;&lt;i data-lucide=&quot;map-pin-check&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+            &lt;div class=&quot;fq-rule-copy&quot;&gt;
+              &lt;div&gt;GPS válido&lt;/div&gt;
+              &lt;div class=&quot;text-small fq-muted&quot;&gt;Evidencia de presencia&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;span&gt;+3&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;fq-points-row&quot;&gt;
+            &lt;span class=&quot;fq-rule-icon&quot;&gt;&lt;i data-lucide=&quot;camera&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+            &lt;div class=&quot;fq-rule-copy&quot;&gt;
+              &lt;div&gt;Foto adjunta&lt;/div&gt;
+              &lt;div class=&quot;text-small fq-muted&quot;&gt;Cruce con Galleries&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;span&gt;+2&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+
+        &lt;article class=&quot;card fq-quality&quot;&gt;
+          &lt;h3&gt;Por qué es más justo&lt;/h3&gt;
+          &lt;div class=&quot;fq-checks&quot; style=&quot;margin-top: 12px;&quot;&gt;
+            &lt;div class=&quot;fq-check&quot;&gt;&lt;i data-lucide=&quot;check-circle-2&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;No da puntos a resultados rechazados&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;fq-check&quot;&gt;&lt;i data-lucide=&quot;check-circle-2&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;Las tiendas repetidas no inflan el ranking&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;fq-check&quot;&gt;&lt;i data-lucide=&quot;check-circle-2&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;Premia evidencia verificable&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;fq-check&quot;&gt;&lt;i data-lucide=&quot;check-circle-2&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;No recompensa encuestas demasiado rápidas&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+
+        &lt;button class=&quot;btn btn-block&quot; id=&quot;fq-back-ranking&quot; type=&quot;button&quot;&gt;
+          &lt;i data-lucide=&quot;arrow-left&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;
+          Volver al ranking
+        &lt;/button&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
+
+    &lt;nav class=&quot;fq-nav&quot; aria-label=&quot;Navegación principal&quot;&gt;
+      &lt;button class=&quot;btn btn-ghost is-selected&quot; type=&quot;button&quot; data-screen=&quot;home&quot; aria-pressed=&quot;true&quot;&gt;
+        &lt;i data-lucide=&quot;house&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;text-small&quot;&gt;Hoy&lt;/span&gt;
+      &lt;/button&gt;
+      &lt;button class=&quot;btn btn-ghost&quot; type=&quot;button&quot; data-screen=&quot;ranking&quot; aria-pressed=&quot;false&quot;&gt;
+        &lt;i data-lucide=&quot;trophy&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;text-small&quot;&gt;Ranking&lt;/span&gt;
+      &lt;/button&gt;
+      &lt;button class=&quot;btn btn-ghost&quot; type=&quot;button&quot; data-screen=&quot;activity&quot; aria-pressed=&quot;false&quot;&gt;
+        &lt;i data-lucide=&quot;chart-no-axes-column-increasing&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;text-small&quot;&gt;Actividad&lt;/span&gt;
+      &lt;/button&gt;
+      &lt;button class=&quot;btn btn-ghost&quot; type=&quot;button&quot; data-screen=&quot;rewards&quot; aria-pressed=&quot;false&quot;&gt;
+        &lt;i data-lucide=&quot;medal&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;text-small&quot;&gt;Logros&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/nav&gt;
+  &lt;/section&gt;
+
+  &lt;script&gt;
+    (() =&gt; {
+      const root = document.getElementById(&quot;field-quest-android&quot;);
+      const screens = [...root.querySelectorAll(&quot;.fq-screen&quot;)];
+      const navButtons = [...root.querySelectorAll(&quot;[data-screen]&quot;)];
+      const title = root.querySelector(&quot;#fq-page-title&quot;);
+      const list = root.querySelector(&quot;#fq-leader-list&quot;);
+      const ranges = [...root.querySelectorAll(&quot;[data-range]&quot;)];
+      const languageButtons = [...root.querySelectorAll(&quot;[data-language]&quot;)];
+      const phone = root.querySelector(&quot;.fq-phone&quot;);
+      let currentLanguage = &quot;es&quot;;
+
+      const weekly = [
+        { rank: 1, initials: &quot;CC&quot;, name: &quot;Carlos Crespo&quot;, detailEs: &quot;147 tiendas únicas&quot;, detailEn: &quot;147 unique shops&quot;, points: &quot;2.919&quot; },
+        { rank: 2, initials: &quot;GM&quot;, name: &quot;Grediel Mery&quot;, detailEs: &quot;86 tiendas · 100% evidencia&quot;, detailEn: &quot;86 shops · 100% evidence&quot;, points: &quot;1.720&quot;, me: true },
+        { rank: 3, initials: &quot;FA&quot;, name: &quot;Agente 330162&quot;, nameEn: &quot;Agent 330162&quot;, detailEs: &quot;73 tiendas · 100% evidencia&quot;, detailEn: &quot;73 shops · 100% evidence&quot;, points: &quot;1.460&quot; },
+        { rank: 4, initials: &quot;AT&quot;, name: &quot;Alejandro Tafur&quot;, detailEs: &quot;70 tiendas únicas&quot;, detailEn: &quot;70 unique shops&quot;, points: &quot;1.405&quot; },
+        { rank: 5, initials: &quot;MH&quot;, name: &quot;Monica Henrriquez&quot;, detailEs: &quot;5 tiendas únicas&quot;, detailEn: &quot;5 unique shops&quot;, points: &quot;103&quot; }
+      ];
+
+      const monthly = [
+        { rank: 1, initials: &quot;CC&quot;, name: &quot;Carlos Crespo&quot;, detailEs: &quot;239 tiendas únicas&quot;, detailEn: &quot;239 unique shops&quot;, points: &quot;4.549&quot; },
+        { rank: 2, initials: &quot;GM&quot;, name: &quot;Grediel Mery&quot;, detailEs: &quot;132 tiendas únicas&quot;, detailEn: &quot;132 unique shops&quot;, points: &quot;2.649&quot;, me: true },
+        { rank: 3, initials: &quot;AT&quot;, name: &quot;Alejandro Tafur&quot;, detailEs: &quot;107 tiendas únicas&quot;, detailEn: &quot;107 unique shops&quot;, points: &quot;2.121&quot; },
+        { rank: 4, initials: &quot;FA&quot;, name: &quot;Agente 330162&quot;, nameEn: &quot;Agent 330162&quot;, detailEs: &quot;73 tiendas únicas&quot;, detailEn: &quot;73 unique shops&quot;, points: &quot;1.460&quot; },
+        { rank: 5, initials: &quot;MH&quot;, name: &quot;Monica Henrriquez&quot;, detailEs: &quot;49 tiendas únicas&quot;, detailEn: &quot;49 unique shops&quot;, points: &quot;869&quot; }
+      ];
+
+      const screenTitles = {
+        es: {
+          home: &quot;Mi jornada&quot;,
+          ranking: &quot;Ranking&quot;,
+          activity: &quot;Actividad&quot;,
+          rewards: &quot;Logros&quot;,
+          points: &quot;Puntos justos&quot;
+        },
+        en: {
+          home: &quot;My day&quot;,
+          ranking: &quot;Ranking&quot;,
+          activity: &quot;Activity&quot;,
+          rewards: &quot;Achievements&quot;,
+          points: &quot;Fair points&quot;
+        }
+      };
+
+      const englishText = {
+        &quot;Mi jornada&quot;: &quot;My day&quot;,
+        &quot;Hola, Grediel&quot;: &quot;Hello, Grediel&quot;,
+        &quot;Lunes 13 de julio · último día con datos&quot;: &quot;Monday, July 13 · latest date in the data&quot;,
+        &quot;Meta diaria&quot;: &quot;Daily goal&quot;,
+        &quot;Te falta 1 visita&quot;: &quot;1 visit remaining&quot;,
+        &quot;19 de 20 tiendas completadas&quot;: &quot;19 of 20 shops completed&quot;,
+        &quot;+380 puntos hoy&quot;: &quot;+380 points today&quot;,
+        &quot;META&quot;: &quot;GOAL&quot;,
+        &quot;Tiendas&quot;: &quot;Shops&quot;,
+        &quot;Aceptadas&quot;: &quot;Accepted&quot;,
+        &quot;Con GPS&quot;: &quot;With GPS&quot;,
+        &quot;Últimos 7 días&quot;: &quot;Last 7 days&quot;,
+        &quot;86 tiendas únicas · 6 días activos&quot;: &quot;86 unique shops · 6 active days&quot;,
+        &quot;#2 equipo&quot;: &quot;#2 team&quot;,
+        &quot;Reto “Cobertura total”&quot;: &quot;“Full coverage” challenge&quot;,
+        &quot;Visita 100 tiendas únicas con evidencia completa&quot;: &quot;Visit 100 unique shops with complete evidence&quot;,
+        &quot;+250 pts al completar&quot;: &quot;+250 pts on completion&quot;,
+        &quot;Liga de campo&quot;: &quot;Field league&quot;,
+        &quot;Campaña “Sondeo de Presencia de Marcas”&quot;: &quot;Campaign “Brand Presence Survey”&quot;,
+        &quot;7 días&quot;: &quot;7 days&quot;,
+        &quot;Julio&quot;: &quot;July&quot;,
+        &quot;Cómo se calculan los puntos&quot;: &quot;How points are calculated&quot;,
+        &quot;Tu actividad&quot;: &quot;Your activity&quot;,
+        &quot;Datos reales del 7 al 13 de julio&quot;: &quot;Real data from July 7–13&quot;,
+        &quot;Visitas&quot;: &quot;Visits&quot;,
+        &quot;Únicas&quot;: &quot;Unique&quot;,
+        &quot;Días activos&quot;: &quot;Active days&quot;,
+        &quot;Ritmo diario&quot;: &quot;Daily pace&quot;,
+        &quot;Promedio: 14,3 visitas por día activo&quot;: &quot;Average: 14.3 visits per active day&quot;,
+        &quot;Mejor: 24&quot;: &quot;Best: 24&quot;,
+        &quot;Calidad de evidencia&quot;: &quot;Evidence quality&quot;,
+        &quot;Evita premiar solo la velocidad&quot;: &quot;Avoid rewarding speed alone&quot;,
+        &quot;86 aceptadas&quot;: &quot;86 accepted&quot;,
+        &quot;86 con GPS&quot;: &quot;86 with GPS&quot;,
+        &quot;86 con foto&quot;: &quot;86 with photo&quot;,
+        &quot;86 tiendas únicas&quot;: &quot;86 unique shops&quot;,
+        &quot;Comparación semanal&quot;: &quot;Weekly comparison&quot;,
+        &quot;Semana completa anterior&quot;: &quot;Previous complete week&quot;,
+        &quot;86 en los últimos 7 días · 78 en la semana anterior&quot;: &quot;86 in the last 7 days · 78 in the previous week&quot;,
+        &quot;Retos y logros&quot;: &quot;Challenges and achievements&quot;,
+        &quot;Reconoce cobertura y calidad, no solo volumen&quot;: &quot;Recognize coverage and quality, not only volume&quot;,
+        &quot;Reto semanal&quot;: &quot;Weekly challenge&quot;,
+        &quot;100 tiendas únicas con GPS + foto&quot;: &quot;100 unique shops with GPS + photo&quot;,
+        &quot;4 días&quot;: &quot;4 days&quot;,
+        &quot;Premio: 250 pts&quot;: &quot;Reward: 250 pts&quot;,
+        &quot;Insignias&quot;: &quot;Badges&quot;,
+        &quot;3 de 4&quot;: &quot;3 of 4&quot;,
+        &quot;Explorador&quot;: &quot;Explorer&quot;,
+        &quot;50 tiendas únicas&quot;: &quot;50 unique shops&quot;,
+        &quot;Ganada&quot;: &quot;Earned&quot;,
+        &quot;Evidencia pro&quot;: &quot;Evidence pro&quot;,
+        &quot;100% GPS + foto&quot;: &quot;100% GPS + photo&quot;,
+        &quot;Constante&quot;: &quot;Consistent&quot;,
+        &quot;6 días activos&quot;: &quot;6 active days&quot;,
+        &quot;Cobertura 100&quot;: &quot;Coverage 100&quot;,
+        &quot;Faltan 14 tiendas&quot;: &quot;14 shops remaining&quot;,
+        &quot;Cómo ganas puntos&quot;: &quot;How you earn points&quot;,
+        &quot;Reglas simples que ya pueden calcularse con Results, Answers y Galleries&quot;: &quot;Simple rules already calculable from Results, Answers and Galleries&quot;,
+        &quot;Visita aceptada&quot;: &quot;Accepted visit&quot;,
+        &quot;Solo resultados con status = 2&quot;: &quot;Only results with status = 2&quot;,
+        &quot;Tienda única&quot;: &quot;Unique shop&quot;,
+        &quot;No premia repeticiones&quot;: &quot;Repeated visits do not score&quot;,
+        &quot;GPS válido&quot;: &quot;Valid GPS&quot;,
+        &quot;Evidencia de presencia&quot;: &quot;Proof of presence&quot;,
+        &quot;Foto adjunta&quot;: &quot;Photo attached&quot;,
+        &quot;Cruce con Galleries&quot;: &quot;Join with Galleries&quot;,
+        &quot;Por qué es más justo&quot;: &quot;Why it is fairer&quot;,
+        &quot;No da puntos a resultados rechazados&quot;: &quot;Rejected results earn no points&quot;,
+        &quot;Las tiendas repetidas no inflan el ranking&quot;: &quot;Repeated shops do not inflate the ranking&quot;,
+        &quot;Premia evidencia verificable&quot;: &quot;Rewards verifiable evidence&quot;,
+        &quot;No recompensa encuestas demasiado rápidas&quot;: &quot;Does not reward overly fast surveys&quot;,
+        &quot;Volver al ranking&quot;: &quot;Back to ranking&quot;,
+        &quot;Hoy&quot;: &quot;Today&quot;,
+        &quot;Actividad&quot;: &quot;Activity&quot;,
+        &quot;Logros&quot;: &quot;Achievements&quot;,
+        &quot;Puntos justos&quot;: &quot;Fair points&quot;,
+        &quot;Tú&quot;: &quot;You&quot;,
+        &quot;M&quot;: &quot;T&quot;,
+        &quot;X&quot;: &quot;W&quot;,
+        &quot;J&quot;: &quot;T&quot;,
+        &quot;V&quot;: &quot;F&quot;,
+        &quot;D&quot;: &quot;S&quot;,
+        &quot;L&quot;: &quot;M&quot;
+      };
+
+      const englishAttributes = {
+        &quot;Prototipo Android de gamificación para encuestadores de campo&quot;: &quot;Android gamification prototype for field surveyors&quot;,
+        &quot;Perfil de Grediel Mery&quot;: &quot;Grediel Mery profile&quot;,
+        &quot;Idioma de la aplicación&quot;: &quot;Application language&quot;,
+        &quot;Ver demostración en español&quot;: &quot;View demo in Spanish&quot;,
+        &quot;Ver demostración en inglés&quot;: &quot;View demo in English&quot;,
+        &quot;Progreso de meta diaria: 95 por ciento&quot;: &quot;Daily goal progress: 95 percent&quot;,
+        &quot;Visitas de Grediel del 7 al 13 de julio: 11, 23, 24, 1, 8, 0 y 19&quot;: &quot;Grediel visits from July 7 to 13: 11, 23, 24, 1, 8, 0 and 19&quot;,
+        &quot;Periodo del ranking&quot;: &quot;Ranking period&quot;,
+        &quot;Tres primeros del ranking&quot;: &quot;Top three in the ranking&quot;,
+        &quot;Gráfico de actividad diaria con 86 visitas totales&quot;: &quot;Daily activity chart with 86 total visits&quot;,
+        &quot;Calidad de evidencia 100 por ciento&quot;: &quot;Evidence quality: 100 percent&quot;,
+        &quot;86 visitas frente a 78 de la semana anterior&quot;: &quot;86 visits compared with 78 in the previous week&quot;,
+        &quot;Navegación principal&quot;: &quot;Main navigation&quot;
+      };
+
+      const translatableTextNodes = [];
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+      let textNode;
+      while ((textNode = walker.nextNode())) {
+        const parentTag = textNode.parentElement?.tagName;
+        const trimmed = textNode.nodeValue.trim();
+        if (parentTag !== &quot;SCRIPT&quot; &amp;&amp; parentTag !== &quot;STYLE&quot; &amp;&amp; englishText[trimmed]) {
+          const match = textNode.nodeValue.match(/^(\s*)(.*?)(\s*)$/s);
+          translatableTextNodes.push({
+            node: textNode,
+            prefix: match[1],
+            es: trimmed,
+            en: englishText[trimmed],
+            suffix: match[3]
+          });
+        }
+      }
+
+      const translatableAttributes = [];
+      root.querySelectorAll(&quot;[aria-label]&quot;).forEach((element) =&gt; {
+        const spanish = element.getAttribute(&quot;aria-label&quot;);
+        if (englishAttributes[spanish]) {
+          translatableAttributes.push({ element, es: spanish, en: englishAttributes[spanish] });
+        }
+      });
+
+      function showScreen(name) {
+        screens.forEach((screen) =&gt; {
+          screen.hidden = screen.id !== `fq-${name}`;
+        });
+        navButtons.forEach((button) =&gt; {
+          const selected = button.dataset.screen === name || (name === &quot;points&quot; &amp;&amp; button.dataset.screen === &quot;ranking&quot;);
+          button.classList.toggle(&quot;is-selected&quot;, selected);
+          button.setAttribute(&quot;aria-pressed&quot;, String(selected));
+        });
+        title.textContent = screenTitles[currentLanguage][name];
+      }
+
+      function renderLeaders(items) {
+        list.innerHTML = items.map((item) =&gt; `
+          &lt;div class=&quot;fq-list-row${item.me ? &quot; is-me&quot; : &quot;&quot;}&quot;&gt;
+            &lt;span class=&quot;fq-rank&quot;&gt;${item.rank}&lt;/span&gt;
+            &lt;div class=&quot;fq-person&quot;&gt;
+              &lt;span class=&quot;fq-avatar&quot;&gt;${item.initials}&lt;/span&gt;
+              &lt;div class=&quot;fq-person-copy&quot;&gt;
+                &lt;div&gt;${currentLanguage === &quot;en&quot; &amp;&amp; item.nameEn ? item.nameEn : item.name}${item.me ? ` · ${currentLanguage === &quot;en&quot; ? &quot;You&quot; : &quot;Tú&quot;}` : &quot;&quot;}&lt;/div&gt;
+                &lt;div class=&quot;text-small fq-muted&quot;&gt;${currentLanguage === &quot;en&quot; ? item.detailEn : item.detailEs}&lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;fq-points&quot;&gt;
+              &lt;div&gt;${item.points}&lt;/div&gt;
+              &lt;div class=&quot;text-small fq-muted&quot;&gt;pts&lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        `).join(&quot;&quot;);
+      }
+
+      function updatePodium(isMonth) {
+        root.querySelector(&#x27;[data-podium-initials=&quot;third&quot;]&#x27;).textContent = isMonth ? &quot;AT&quot; : &quot;FA&quot;;
+        root.querySelector(&#x27;[data-podium-name=&quot;third&quot;]&#x27;).textContent = isMonth
+          ? &quot;Alejandro&quot;
+          : (currentLanguage === &quot;en&quot; ? &quot;Agent 162&quot; : &quot;Agente 162&quot;);
+        root.querySelector(&#x27;[data-podium-points=&quot;first&quot;]&#x27;).textContent = isMonth ? &quot;4.549 pts&quot; : &quot;2.919 pts&quot;;
+        root.querySelector(&#x27;[data-podium-points=&quot;second&quot;]&#x27;).textContent = isMonth ? &quot;2.649 pts&quot; : &quot;1.720 pts&quot;;
+        root.querySelector(&#x27;[data-podium-points=&quot;third&quot;]&#x27;).textContent = isMonth ? &quot;2.121 pts&quot; : &quot;1.460 pts&quot;;
+      }
+
+      function setLanguage(language) {
+        currentLanguage = language;
+        phone.setAttribute(&quot;lang&quot;, language);
+        languageButtons.forEach((button) =&gt; {
+          const selected = button.dataset.language === language;
+          button.classList.toggle(&quot;is-selected&quot;, selected);
+          button.setAttribute(&quot;aria-pressed&quot;, String(selected));
+        });
+        translatableTextNodes.forEach((item) =&gt; {
+          item.node.nodeValue = `${item.prefix}${item[language]}${item.suffix}`;
+        });
+        translatableAttributes.forEach((item) =&gt; {
+          item.element.setAttribute(&quot;aria-label&quot;, item[language]);
+        });
+        const activeScreen = screens.find((screen) =&gt; !screen.hidden);
+        const activeName = activeScreen.id.replace(&quot;fq-&quot;, &quot;&quot;);
+        title.textContent = screenTitles[language][activeName];
+        const monthSelected = root.querySelector(&#x27;[data-range=&quot;month&quot;]&#x27;).getAttribute(&quot;aria-pressed&quot;) === &quot;true&quot;;
+        renderLeaders(monthSelected ? monthly : weekly);
+        updatePodium(monthSelected);
+      }
+
+      navButtons.forEach((button) =&gt; {
+        button.addEventListener(&quot;click&quot;, () =&gt; showScreen(button.dataset.screen));
+      });
+
+      languageButtons.forEach((button) =&gt; {
+        button.addEventListener(&quot;click&quot;, () =&gt; setLanguage(button.dataset.language));
+      });
+
+      ranges.forEach((button) =&gt; {
+        button.addEventListener(&quot;click&quot;, () =&gt; {
+          ranges.forEach((peer) =&gt; {
+            const selected = peer === button;
+            peer.classList.toggle(&quot;is-selected&quot;, selected);
+            peer.setAttribute(&quot;aria-pressed&quot;, String(selected));
+          });
+          const isMonth = button.dataset.range === &quot;month&quot;;
+          renderLeaders(isMonth ? monthly : weekly);
+          updatePodium(isMonth);
+        });
+      });
+
+      root.querySelector(&quot;#fq-how-points&quot;).addEventListener(&quot;click&quot;, () =&gt; showScreen(&quot;points&quot;));
+      root.querySelector(&quot;#fq-back-ranking&quot;).addEventListener(&quot;click&quot;, () =&gt; showScreen(&quot;ranking&quot;));
+      renderLeaders(weekly);
+    })();
+  &lt;/script&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set([&quot;top&quot;, &quot;right&quot;, &quot;bottom&quot;, &quot;left&quot;]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+
+  const getTrigger = (target) =&gt;
+    target?.nodeType === Node.ELEMENT_NODE
+      ? target.closest(&quot;[data-tooltip]&quot;)
+      : null;
+  const containsTarget = (trigger, target) =&gt;
+    target?.nodeType != null &amp;&amp; trigger.contains(target);
+  const getContent = (trigger) =&gt;
+    trigger.getAttribute(&quot;data-tooltip&quot;)?.trim() ?? &quot;&quot;;
+  const getPlacement = (trigger) =&gt; {
+    const placement = trigger.getAttribute(&quot;data-tooltip-placement&quot;);
+    return tooltipPlacements.has(placement) ? placement : &quot;top&quot;;
+  };
+  const getTooltip = () =&gt; {
+    if (tooltip == null) {
+      tooltip = document.createElement(&quot;div&quot;);
+      tooltip.id = tooltipId;
+      tooltip.className = &quot;tooltip&quot;;
+      tooltip.setAttribute(&quot;role&quot;, &quot;tooltip&quot;);
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) =&gt; {
+    const ids = new Set(
+      (trigger.getAttribute(&quot;aria-describedby&quot;) ?? &quot;&quot;)
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute(&quot;aria-describedby&quot;);
+    } else {
+      trigger.setAttribute(&quot;aria-describedby&quot;, [...ids].join(&quot; &quot;));
+    }
+  };
+  const clearOpenTimeout = () =&gt; {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) =&gt; {
+    clearOpenTimeout();
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) =&gt; {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-width&quot;,
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-height&quot;,
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: &quot;fixed&quot;,
+    })
+      .then(({ x, y }) =&gt; {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = &quot;visible&quot;;
+      })
+      .catch(() =&gt; {
+        if (activeTrigger === trigger &amp;&amp; request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) =&gt; {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = &quot;hidden&quot;;
+    floating.style.transform = &quot;translate(0, 0)&quot;;
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () =&gt; {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) =&gt; {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() &lt; skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() =&gt; {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) =&gt; {
+    if (event.pointerType === &quot;touch&quot;) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handleLeave = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (trigger?.matches(&quot;:focus-visible&quot;)) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) =&gt; {
+    if (event.key === &quot;Escape&quot;) {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const destroy = () =&gt; {
+    closeTooltip(false);
+    document.removeEventListener(&quot;pointerover&quot;, handlePointerOpen);
+    document.removeEventListener(&quot;pointerout&quot;, handleLeave);
+    document.removeEventListener(&quot;focusin&quot;, handleFocusIn);
+    document.removeEventListener(&quot;focusout&quot;, handleLeave);
+    document.removeEventListener(&quot;keydown&quot;, handleKeyDown);
+    document.removeEventListener(&quot;contextmenu&quot;, handleContextMenu);
+    tooltip = null;
+  };
+
+  document.addEventListener(&quot;pointerover&quot;, handlePointerOpen);
+  document.addEventListener(&quot;pointerout&quot;, handleLeave);
+  document.addEventListener(&quot;focusin&quot;, handleFocusIn);
+  document.addEventListener(&quot;focusout&quot;, handleLeave);
+  document.addEventListener(&quot;keydown&quot;, handleKeyDown);
+  document.addEventListener(&quot;contextmenu&quot;, handleContextMenu);
+  window.addEventListener(&quot;pagehide&quot;, destroy, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-lucide&quot; async src=&quot;https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  const initialize = () =&gt; {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById(&quot;codex-visualization-lucide&quot;)
+    ?.addEventListener(&quot;load&quot;, initialize, { once: true });
+})();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+</body>
+</html>

@@ -1,0 +1,1154 @@
+<div id="field-quest-android">
+  <style>
+    #field-quest-android {
+      --fq-positive: var(--viz-series-2);
+      --fq-warning: var(--viz-series-3);
+      color: var(--foreground);
+      display: grid;
+      place-items: start center;
+      width: 100%;
+    }
+
+    #field-quest-android * {
+      box-sizing: border-box;
+    }
+
+    #field-quest-android .fq-phone {
+      width: min(100%, 420px);
+      background: var(--background);
+      color: var(--foreground);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 18px 45px color-mix(in srgb, var(--foreground) 12%, transparent);
+    }
+
+    #field-quest-android .fq-statusbar,
+    #field-quest-android .fq-appbar,
+    #field-quest-android .fq-section-head,
+    #field-quest-android .fq-list-row,
+    #field-quest-android .fq-person,
+    #field-quest-android .fq-nav,
+    #field-quest-android .fq-inline,
+    #field-quest-android .fq-chart-labels,
+    #field-quest-android .fq-points-row {
+      display: flex;
+      align-items: center;
+    }
+
+    #field-quest-android .fq-statusbar,
+    #field-quest-android .fq-appbar,
+    #field-quest-android .fq-section-head,
+    #field-quest-android .fq-list-row,
+    #field-quest-android .fq-chart-labels,
+    #field-quest-android .fq-points-row {
+      justify-content: space-between;
+    }
+
+    #field-quest-android .fq-statusbar {
+      padding: 10px 20px 6px;
+    }
+
+    #field-quest-android .fq-status-icons {
+      display: flex;
+      gap: 7px;
+    }
+
+    #field-quest-android .fq-status-icons svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    #field-quest-android .fq-appbar {
+      padding: 10px 18px 16px;
+    }
+
+    #field-quest-android .fq-brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    #field-quest-android .fq-brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      color: var(--primary-foreground);
+      background:
+        radial-gradient(circle at 35% 50%, var(--viz-series-3) 0 14%, transparent 15%),
+        radial-gradient(circle at 65% 50%, var(--viz-series-1) 0 14%, transparent 15%),
+        var(--primary);
+    }
+
+    #field-quest-android .fq-profile {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--secondary);
+      color: var(--secondary-foreground);
+      border: 1px solid var(--border);
+    }
+
+    #field-quest-android .fq-app-actions,
+    #field-quest-android .fq-language {
+      display: flex;
+      align-items: center;
+    }
+
+    #field-quest-android .fq-app-actions {
+      gap: 8px;
+    }
+
+    #field-quest-android .fq-language {
+      gap: 3px;
+    }
+
+    #field-quest-android .fq-content {
+      padding: 0 16px 18px;
+    }
+
+    #field-quest-android .fq-screen[hidden] {
+      display: none;
+    }
+
+    #field-quest-android .fq-screen {
+      display: grid;
+      gap: 14px;
+    }
+
+    #field-quest-android h2,
+    #field-quest-android h3,
+    #field-quest-android p {
+      margin: 0;
+    }
+
+    #field-quest-android .fq-muted {
+      color: var(--muted-foreground);
+    }
+
+    #field-quest-android .fq-hero {
+      padding: 18px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      background:
+        linear-gradient(135deg, color-mix(in srgb, var(--viz-series-1) 18%, var(--card)), var(--card));
+    }
+
+    #field-quest-android .fq-kicker {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    #field-quest-android .fq-ring {
+      width: 92px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: conic-gradient(var(--viz-series-1) 0 95%, var(--muted) 95% 100%);
+      position: relative;
+    }
+
+    #field-quest-android .fq-ring::after {
+      content: "";
+      position: absolute;
+      inset: 9px;
+      border-radius: 50%;
+      background: var(--card);
+    }
+
+    #field-quest-android .fq-ring-value {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    #field-quest-android .fq-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+    }
+
+    #field-quest-android .fq-mini-card {
+      padding: 13px 10px;
+      text-align: center;
+    }
+
+    #field-quest-android .fq-mini-card svg {
+      color: var(--viz-series-1);
+      margin-bottom: 5px;
+    }
+
+    #field-quest-android .fq-section-head {
+      gap: 12px;
+    }
+
+    #field-quest-android .fq-activity-card,
+    #field-quest-android .fq-challenge,
+    #field-quest-android .fq-quality,
+    #field-quest-android .fq-points-card {
+      padding: 16px;
+    }
+
+    #field-quest-android .fq-bars {
+      height: 120px;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      align-items: end;
+      gap: 8px;
+      padding-top: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    #field-quest-android .fq-bar-wrap {
+      height: 100%;
+      display: flex;
+      align-items: end;
+      justify-content: center;
+    }
+
+    #field-quest-android .fq-bar {
+      width: min(24px, 72%);
+      min-height: 4px;
+      border-radius: 7px 7px 2px 2px;
+      background: var(--viz-series-1);
+      position: relative;
+    }
+
+    #field-quest-android .fq-bar.is-zero {
+      background: var(--muted);
+    }
+
+    #field-quest-android .fq-bar::before {
+      content: attr(data-value);
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 5px);
+      transform: translateX(-50%);
+      color: var(--muted-foreground);
+    }
+
+    #field-quest-android .fq-chart-labels {
+      padding-top: 7px;
+    }
+
+    #field-quest-android .fq-chart-labels span {
+      width: calc(100% / 7);
+      text-align: center;
+    }
+
+    #field-quest-android .fq-progress {
+      height: 8px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: var(--muted);
+      margin: 10px 0 8px;
+    }
+
+    #field-quest-android .fq-progress > span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--viz-series-1);
+    }
+
+    #field-quest-android .fq-segmented {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      padding: 4px;
+      background: var(--muted);
+      border-radius: 12px;
+    }
+
+    #field-quest-android .fq-segmented .btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    #field-quest-android .fq-podium {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      align-items: end;
+      gap: 8px;
+      padding-top: 8px;
+    }
+
+    #field-quest-android .fq-podium-person {
+      text-align: center;
+      display: grid;
+      justify-items: center;
+      gap: 6px;
+    }
+
+    #field-quest-android .fq-medal {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--secondary);
+      color: var(--secondary-foreground);
+      border: 3px solid var(--border);
+    }
+
+    #field-quest-android .fq-podium-person.is-first .fq-medal {
+      width: 66px;
+      height: 66px;
+      background: color-mix(in srgb, var(--viz-series-3) 28%, var(--card));
+      border-color: var(--viz-series-3);
+    }
+
+    #field-quest-android .fq-rank {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--muted);
+      color: var(--muted-foreground);
+      flex: 0 0 auto;
+    }
+
+    #field-quest-android .fq-list {
+      display: grid;
+      gap: 3px;
+    }
+
+    #field-quest-android .fq-list-row {
+      padding: 11px 4px;
+      border-bottom: 1px solid var(--border);
+      gap: 10px;
+    }
+
+    #field-quest-android .fq-list-row:last-child {
+      border-bottom: 0;
+    }
+
+    #field-quest-android .fq-list-row.is-me {
+      background: var(--accent);
+      color: var(--accent-foreground);
+      border-radius: 12px;
+      padding-inline: 10px;
+      border-bottom-color: transparent;
+    }
+
+    #field-quest-android .fq-person {
+      min-width: 0;
+      gap: 9px;
+      flex: 1;
+    }
+
+    #field-quest-android .fq-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--secondary);
+      color: var(--secondary-foreground);
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+    }
+
+    #field-quest-android .fq-person-copy {
+      min-width: 0;
+    }
+
+    #field-quest-android .fq-person-copy > div:first-child {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    #field-quest-android .fq-points {
+      text-align: right;
+      flex: 0 0 auto;
+    }
+
+    #field-quest-android .fq-quality-grid {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+
+    #field-quest-android .fq-quality-ring {
+      width: 92px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: conic-gradient(var(--fq-positive) 0 100%, var(--muted) 100%);
+      position: relative;
+    }
+
+    #field-quest-android .fq-quality-ring::after {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border-radius: 50%;
+      background: var(--card);
+    }
+
+    #field-quest-android .fq-quality-ring span {
+      position: relative;
+      z-index: 1;
+    }
+
+    #field-quest-android .fq-checks {
+      display: grid;
+      gap: 9px;
+    }
+
+    #field-quest-android .fq-check {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    #field-quest-android .fq-check svg {
+      color: var(--fq-positive);
+      flex: 0 0 auto;
+    }
+
+    #field-quest-android .fq-badge-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    #field-quest-android .fq-achievement {
+      padding: 15px;
+      text-align: center;
+      min-height: 132px;
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 7px;
+    }
+
+    #field-quest-android .fq-achievement.is-locked {
+      opacity: .55;
+    }
+
+    #field-quest-android .fq-achievement-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: color-mix(in srgb, var(--viz-series-3) 22%, var(--card));
+      color: var(--foreground);
+    }
+
+    #field-quest-android .fq-challenge-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+    }
+
+    #field-quest-android .fq-challenge-head svg {
+      color: var(--viz-series-1);
+      flex: 0 0 auto;
+    }
+
+    #field-quest-android .fq-points-card {
+      display: grid;
+      gap: 11px;
+    }
+
+    #field-quest-android .fq-points-row {
+      gap: 10px;
+    }
+
+    #field-quest-android .fq-rule-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      color: var(--secondary-foreground);
+      background: var(--secondary);
+      flex: 0 0 auto;
+    }
+
+    #field-quest-android .fq-rule-copy {
+      flex: 1;
+    }
+
+    #field-quest-android .fq-nav {
+      border-top: 1px solid var(--border);
+      padding: 8px 7px 10px;
+      justify-content: space-around;
+      background: var(--background);
+    }
+
+    #field-quest-android .fq-nav .btn {
+      min-width: 0;
+      flex: 1;
+      display: grid;
+      justify-items: center;
+      gap: 3px;
+      padding-inline: 4px;
+    }
+
+    #field-quest-android .fq-inline {
+      gap: 6px;
+    }
+
+    #field-quest-android .fq-success {
+      color: var(--fq-positive);
+    }
+
+    @media (max-width: 360px) {
+      #field-quest-android .fq-content {
+        padding-inline: 12px;
+      }
+
+      #field-quest-android .fq-hero {
+        grid-template-columns: 1fr;
+      }
+
+      #field-quest-android .fq-ring {
+        width: 84px;
+      }
+
+      #field-quest-android .fq-quality-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <section class="fq-phone" lang="es" aria-label="Prototipo Android de gamificación para encuestadores de campo">
+    <div class="fq-statusbar text-small">
+      <span>09:41</span>
+      <div class="fq-status-icons" aria-hidden="true">
+        <i data-lucide="signal"></i>
+        <i data-lucide="wifi"></i>
+        <i data-lucide="battery-full"></i>
+      </div>
+    </div>
+
+    <header class="fq-appbar">
+      <div class="fq-brand">
+        <span class="fq-brand-mark" aria-hidden="true"><i data-lucide="zap"></i></span>
+        <div>
+          <div class="text-small fq-muted">FIELD QUEST</div>
+          <div id="fq-page-title">Mi jornada</div>
+        </div>
+      </div>
+      <div class="fq-app-actions">
+        <div class="fq-language" aria-label="Idioma de la aplicación">
+          <button class="btn is-selected" type="button" data-language="es" aria-label="Ver demostración en español" aria-pressed="true">ES</button>
+          <button class="btn" type="button" data-language="en" aria-label="Ver demostración en inglés" aria-pressed="false">EN</button>
+        </div>
+        <span class="fq-profile" aria-label="Perfil de Grediel Mery">GM</span>
+      </div>
+    </header>
+
+    <main class="fq-content">
+      <section class="fq-screen" id="fq-home" data-title="Mi jornada">
+        <div>
+          <h2>Hola, Grediel</h2>
+          <p class="fq-muted">Lunes 13 de julio · último día con datos</p>
+        </div>
+
+        <article class="card fq-hero">
+          <div>
+            <div class="fq-kicker text-small">
+              <i data-lucide="sparkles" aria-hidden="true"></i>
+              <span>Meta diaria</span>
+            </div>
+            <h3>Te falta 1 visita</h3>
+            <p class="fq-muted">19 de 20 tiendas completadas</p>
+            <div class="fq-inline fq-success text-small" style="margin-top: 10px;">
+              <i data-lucide="trending-up" aria-hidden="true"></i>
+              <span>+380 puntos hoy</span>
+            </div>
+          </div>
+          <div class="fq-ring" role="img" aria-label="Progreso de meta diaria: 95 por ciento">
+            <div class="fq-ring-value">
+              <div class="viz-stat-value">95%</div>
+              <div class="text-small fq-muted">META</div>
+            </div>
+          </div>
+        </article>
+
+        <div class="fq-grid-3">
+          <article class="card fq-mini-card">
+            <i data-lucide="store" aria-hidden="true"></i>
+            <div class="viz-stat-value">19</div>
+            <div class="text-small fq-muted">Tiendas</div>
+          </article>
+          <article class="card fq-mini-card">
+            <i data-lucide="shield-check" aria-hidden="true"></i>
+            <div class="viz-stat-value">100%</div>
+            <div class="text-small fq-muted">Aceptadas</div>
+          </article>
+          <article class="card fq-mini-card">
+            <i data-lucide="map-pin-check" aria-hidden="true"></i>
+            <div class="viz-stat-value">100%</div>
+            <div class="text-small fq-muted">Con GPS</div>
+          </article>
+        </div>
+
+        <div class="fq-section-head">
+          <div>
+            <h3>Últimos 7 días</h3>
+            <p class="text-small fq-muted">86 tiendas únicas · 6 días activos</p>
+          </div>
+          <span class="viz-badge">#2 equipo</span>
+        </div>
+
+        <article class="card fq-activity-card">
+          <div class="fq-bars" role="img" aria-label="Visitas de Grediel del 7 al 13 de julio: 11, 23, 24, 1, 8, 0 y 19">
+            <div class="fq-bar-wrap"><span class="fq-bar" data-value="11" style="height:46%"></span></div>
+            <div class="fq-bar-wrap"><span class="fq-bar" data-value="23" style="height:96%"></span></div>
+            <div class="fq-bar-wrap"><span class="fq-bar" data-value="24" style="height:100%"></span></div>
+            <div class="fq-bar-wrap"><span class="fq-bar" data-value="1" style="height:8%"></span></div>
+            <div class="fq-bar-wrap"><span class="fq-bar" data-value="8" style="height:33%"></span></div>
+            <div class="fq-bar-wrap"><span class="fq-bar is-zero" data-value="0" style="height:4%"></span></div>
+            <div class="fq-bar-wrap"><span class="fq-bar" data-value="19" style="height:79%"></span></div>
+          </div>
+          <div class="fq-chart-labels text-small fq-muted" aria-hidden="true">
+            <span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span><span>L</span>
+          </div>
+        </article>
+
+        <article class="card fq-challenge">
+          <div class="fq-challenge-head">
+            <i data-lucide="target" aria-hidden="true"></i>
+            <div>
+              <h3>Reto “Cobertura total”</h3>
+              <p class="text-small fq-muted">Visita 100 tiendas únicas con evidencia completa</p>
+            </div>
+          </div>
+          <div class="fq-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="86">
+            <span style="width:86%"></span>
+          </div>
+          <div class="fq-section-head text-small">
+            <span>86 / 100</span>
+            <span class="fq-muted">+250 pts al completar</span>
+          </div>
+        </article>
+      </section>
+
+      <section class="fq-screen" id="fq-ranking" data-title="Ranking" hidden>
+        <div>
+          <h2>Liga de campo</h2>
+          <p class="fq-muted">Campaña “Sondeo de Presencia de Marcas”</p>
+        </div>
+
+        <div class="fq-segmented" aria-label="Periodo del ranking">
+          <button class="btn is-selected" type="button" data-range="week" aria-pressed="true">7 días</button>
+          <button class="btn" type="button" data-range="month" aria-pressed="false">Julio</button>
+        </div>
+
+        <div class="fq-podium" aria-label="Tres primeros del ranking">
+          <div class="fq-podium-person">
+            <div class="fq-medal" data-podium-initials="third">FA</div>
+            <div class="text-small" data-podium-name="third">Agente 162</div>
+            <div class="text-small fq-muted" data-podium-points="third">1.460 pts</div>
+          </div>
+          <div class="fq-podium-person is-first">
+            <div class="fq-medal" data-podium-initials="first">CC</div>
+            <div class="text-small" data-podium-name="first">Carlos</div>
+            <div class="text-small fq-muted" data-podium-points="first">2.919 pts</div>
+          </div>
+          <div class="fq-podium-person">
+            <div class="fq-medal" data-podium-initials="second">GM</div>
+            <div class="text-small" data-podium-name="second">Grediel</div>
+            <div class="text-small fq-muted" data-podium-points="second">1.720 pts</div>
+          </div>
+        </div>
+
+        <div class="fq-list" id="fq-leader-list" aria-live="polite"></div>
+
+        <button class="btn btn-block" id="fq-how-points" type="button">
+          <i data-lucide="info" aria-hidden="true"></i>
+          Cómo se calculan los puntos
+        </button>
+      </section>
+
+      <section class="fq-screen" id="fq-activity" data-title="Actividad" hidden>
+        <div>
+          <h2>Tu actividad</h2>
+          <p class="fq-muted">Datos reales del 7 al 13 de julio</p>
+        </div>
+
+        <div class="fq-grid-3">
+          <article class="card fq-mini-card">
+            <div class="viz-stat-value">86</div>
+            <div class="text-small fq-muted">Visitas</div>
+          </article>
+          <article class="card fq-mini-card">
+            <div class="viz-stat-value">86</div>
+            <div class="text-small fq-muted">Únicas</div>
+          </article>
+          <article class="card fq-mini-card">
+            <div class="viz-stat-value">6</div>
+            <div class="text-small fq-muted">Días activos</div>
+          </article>
+        </div>
+
+        <article class="card fq-activity-card">
+          <div class="fq-section-head">
+            <div>
+              <h3>Ritmo diario</h3>
+              <p class="text-small fq-muted">Promedio: 14,3 visitas por día activo</p>
+            </div>
+            <span class="viz-badge">Mejor: 24</span>
+          </div>
+          <div class="fq-bars" role="img" aria-label="Gráfico de actividad diaria con 86 visitas totales">
+            <div class="fq-bar-wrap"><span class="fq-bar" data-value="11" style="height:46%"></span></div>
+            <div class="fq-bar-wrap"><span class="fq-bar" data-value="23" style="height:96%"></span></div>
+            <div class="fq-bar-wrap"><span class="fq-bar" data-value="24" style="height:100%"></span></div>
+            <div class="fq-bar-wrap"><span class="fq-bar" data-value="1" style="height:8%"></span></div>
+            <div class="fq-bar-wrap"><span class="fq-bar" data-value="8" style="height:33%"></span></div>
+            <div class="fq-bar-wrap"><span class="fq-bar is-zero" data-value="0" style="height:4%"></span></div>
+            <div class="fq-bar-wrap"><span class="fq-bar" data-value="19" style="height:79%"></span></div>
+          </div>
+          <div class="fq-chart-labels text-small fq-muted" aria-hidden="true">
+            <span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span>
+          </div>
+        </article>
+
+        <article class="card fq-quality">
+          <div class="fq-section-head" style="margin-bottom: 14px;">
+            <div>
+              <h3>Calidad de evidencia</h3>
+              <p class="text-small fq-muted">Evita premiar solo la velocidad</p>
+            </div>
+          </div>
+          <div class="fq-quality-grid">
+            <div class="fq-quality-ring" role="img" aria-label="Calidad de evidencia 100 por ciento">
+              <span class="viz-stat-value">100%</span>
+            </div>
+            <div class="fq-checks">
+              <div class="fq-check"><i data-lucide="check-circle-2" aria-hidden="true"></i><span>86 aceptadas</span></div>
+              <div class="fq-check"><i data-lucide="map-pin-check" aria-hidden="true"></i><span>86 con GPS</span></div>
+              <div class="fq-check"><i data-lucide="camera" aria-hidden="true"></i><span>86 con foto</span></div>
+              <div class="fq-check"><i data-lucide="store" aria-hidden="true"></i><span>86 tiendas únicas</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card fq-challenge">
+          <div class="fq-section-head">
+            <div>
+              <h3>Comparación semanal</h3>
+              <p class="text-small fq-muted">Semana completa anterior</p>
+            </div>
+            <span class="viz-badge">+5%</span>
+          </div>
+          <div class="fq-progress" aria-label="86 visitas frente a 78 de la semana anterior">
+            <span style="width:91%"></span>
+          </div>
+          <p class="text-small fq-muted">86 en los últimos 7 días · 78 en la semana anterior</p>
+        </article>
+      </section>
+
+      <section class="fq-screen" id="fq-rewards" data-title="Logros" hidden>
+        <div>
+          <h2>Retos y logros</h2>
+          <p class="fq-muted">Reconoce cobertura y calidad, no solo volumen</p>
+        </div>
+
+        <article class="card fq-challenge">
+          <div class="fq-section-head">
+            <div class="fq-challenge-head">
+              <i data-lucide="trophy" aria-hidden="true"></i>
+              <div>
+                <h3>Reto semanal</h3>
+                <p class="text-small fq-muted">100 tiendas únicas con GPS + foto</p>
+              </div>
+            </div>
+            <span class="viz-badge">4 días</span>
+          </div>
+          <div class="fq-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="86">
+            <span style="width:86%"></span>
+          </div>
+          <div class="fq-section-head text-small">
+            <span>86 / 100</span>
+            <span>Premio: 250 pts</span>
+          </div>
+        </article>
+
+        <div class="fq-section-head">
+          <h3>Insignias</h3>
+          <span class="text-small fq-muted">3 de 4</span>
+        </div>
+
+        <div class="fq-badge-grid">
+          <article class="card fq-achievement">
+            <span class="fq-achievement-icon"><i data-lucide="map" aria-hidden="true"></i></span>
+            <h3>Explorador</h3>
+            <p class="text-small fq-muted">50 tiendas únicas</p>
+            <span class="viz-badge">Ganada</span>
+          </article>
+          <article class="card fq-achievement">
+            <span class="fq-achievement-icon"><i data-lucide="badge-check" aria-hidden="true"></i></span>
+            <h3>Evidencia pro</h3>
+            <p class="text-small fq-muted">100% GPS + foto</p>
+            <span class="viz-badge">Ganada</span>
+          </article>
+          <article class="card fq-achievement">
+            <span class="fq-achievement-icon"><i data-lucide="calendar-check" aria-hidden="true"></i></span>
+            <h3>Constante</h3>
+            <p class="text-small fq-muted">6 días activos</p>
+            <span class="viz-badge">Ganada</span>
+          </article>
+          <article class="card fq-achievement is-locked">
+            <span class="fq-achievement-icon"><i data-lucide="lock" aria-hidden="true"></i></span>
+            <h3>Cobertura 100</h3>
+            <p class="text-small fq-muted">Faltan 14 tiendas</p>
+            <span class="viz-badge">86%</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="fq-screen" id="fq-points" data-title="Puntos justos" hidden>
+        <div>
+          <h2>Cómo ganas puntos</h2>
+          <p class="fq-muted">Reglas simples que ya pueden calcularse con Results, Answers y Galleries</p>
+        </div>
+
+        <article class="card fq-points-card">
+          <div class="fq-points-row">
+            <span class="fq-rule-icon"><i data-lucide="shield-check" aria-hidden="true"></i></span>
+            <div class="fq-rule-copy">
+              <div>Visita aceptada</div>
+              <div class="text-small fq-muted">Solo resultados con status = 2</div>
+            </div>
+            <span>+10</span>
+          </div>
+          <div class="fq-points-row">
+            <span class="fq-rule-icon"><i data-lucide="store" aria-hidden="true"></i></span>
+            <div class="fq-rule-copy">
+              <div>Tienda única</div>
+              <div class="text-small fq-muted">No premia repeticiones</div>
+            </div>
+            <span>+5</span>
+          </div>
+          <div class="fq-points-row">
+            <span class="fq-rule-icon"><i data-lucide="map-pin-check" aria-hidden="true"></i></span>
+            <div class="fq-rule-copy">
+              <div>GPS válido</div>
+              <div class="text-small fq-muted">Evidencia de presencia</div>
+            </div>
+            <span>+3</span>
+          </div>
+          <div class="fq-points-row">
+            <span class="fq-rule-icon"><i data-lucide="camera" aria-hidden="true"></i></span>
+            <div class="fq-rule-copy">
+              <div>Foto adjunta</div>
+              <div class="text-small fq-muted">Cruce con Galleries</div>
+            </div>
+            <span>+2</span>
+          </div>
+        </article>
+
+        <article class="card fq-quality">
+          <h3>Por qué es más justo</h3>
+          <div class="fq-checks" style="margin-top: 12px;">
+            <div class="fq-check"><i data-lucide="check-circle-2" aria-hidden="true"></i><span>No da puntos a resultados rechazados</span></div>
+            <div class="fq-check"><i data-lucide="check-circle-2" aria-hidden="true"></i><span>Las tiendas repetidas no inflan el ranking</span></div>
+            <div class="fq-check"><i data-lucide="check-circle-2" aria-hidden="true"></i><span>Premia evidencia verificable</span></div>
+            <div class="fq-check"><i data-lucide="check-circle-2" aria-hidden="true"></i><span>No recompensa encuestas demasiado rápidas</span></div>
+          </div>
+        </article>
+
+        <button class="btn btn-block" id="fq-back-ranking" type="button">
+          <i data-lucide="arrow-left" aria-hidden="true"></i>
+          Volver al ranking
+        </button>
+      </section>
+    </main>
+
+    <nav class="fq-nav" aria-label="Navegación principal">
+      <button class="btn btn-ghost is-selected" type="button" data-screen="home" aria-pressed="true">
+        <i data-lucide="house" aria-hidden="true"></i><span class="text-small">Hoy</span>
+      </button>
+      <button class="btn btn-ghost" type="button" data-screen="ranking" aria-pressed="false">
+        <i data-lucide="trophy" aria-hidden="true"></i><span class="text-small">Ranking</span>
+      </button>
+      <button class="btn btn-ghost" type="button" data-screen="activity" aria-pressed="false">
+        <i data-lucide="chart-no-axes-column-increasing" aria-hidden="true"></i><span class="text-small">Actividad</span>
+      </button>
+      <button class="btn btn-ghost" type="button" data-screen="rewards" aria-pressed="false">
+        <i data-lucide="medal" aria-hidden="true"></i><span class="text-small">Logros</span>
+      </button>
+    </nav>
+  </section>
+
+  <script>
+    (() => {
+      const root = document.getElementById("field-quest-android");
+      const screens = [...root.querySelectorAll(".fq-screen")];
+      const navButtons = [...root.querySelectorAll("[data-screen]")];
+      const title = root.querySelector("#fq-page-title");
+      const list = root.querySelector("#fq-leader-list");
+      const ranges = [...root.querySelectorAll("[data-range]")];
+      const languageButtons = [...root.querySelectorAll("[data-language]")];
+      const phone = root.querySelector(".fq-phone");
+      let currentLanguage = "es";
+
+      const weekly = [
+        { rank: 1, initials: "CC", name: "Carlos Crespo", detailEs: "147 tiendas únicas", detailEn: "147 unique shops", points: "2.919" },
+        { rank: 2, initials: "GM", name: "Grediel Mery", detailEs: "86 tiendas · 100% evidencia", detailEn: "86 shops · 100% evidence", points: "1.720", me: true },
+        { rank: 3, initials: "FA", name: "Agente 330162", nameEn: "Agent 330162", detailEs: "73 tiendas · 100% evidencia", detailEn: "73 shops · 100% evidence", points: "1.460" },
+        { rank: 4, initials: "AT", name: "Alejandro Tafur", detailEs: "70 tiendas únicas", detailEn: "70 unique shops", points: "1.405" },
+        { rank: 5, initials: "MH", name: "Monica Henrriquez", detailEs: "5 tiendas únicas", detailEn: "5 unique shops", points: "103" }
+      ];
+
+      const monthly = [
+        { rank: 1, initials: "CC", name: "Carlos Crespo", detailEs: "239 tiendas únicas", detailEn: "239 unique shops", points: "4.549" },
+        { rank: 2, initials: "GM", name: "Grediel Mery", detailEs: "132 tiendas únicas", detailEn: "132 unique shops", points: "2.649", me: true },
+        { rank: 3, initials: "AT", name: "Alejandro Tafur", detailEs: "107 tiendas únicas", detailEn: "107 unique shops", points: "2.121" },
+        { rank: 4, initials: "FA", name: "Agente 330162", nameEn: "Agent 330162", detailEs: "73 tiendas únicas", detailEn: "73 unique shops", points: "1.460" },
+        { rank: 5, initials: "MH", name: "Monica Henrriquez", detailEs: "49 tiendas únicas", detailEn: "49 unique shops", points: "869" }
+      ];
+
+      const screenTitles = {
+        es: {
+          home: "Mi jornada",
+          ranking: "Ranking",
+          activity: "Actividad",
+          rewards: "Logros",
+          points: "Puntos justos"
+        },
+        en: {
+          home: "My day",
+          ranking: "Ranking",
+          activity: "Activity",
+          rewards: "Achievements",
+          points: "Fair points"
+        }
+      };
+
+      const englishText = {
+        "Mi jornada": "My day",
+        "Hola, Grediel": "Hello, Grediel",
+        "Lunes 13 de julio · último día con datos": "Monday, July 13 · latest date in the data",
+        "Meta diaria": "Daily goal",
+        "Te falta 1 visita": "1 visit remaining",
+        "19 de 20 tiendas completadas": "19 of 20 shops completed",
+        "+380 puntos hoy": "+380 points today",
+        "META": "GOAL",
+        "Tiendas": "Shops",
+        "Aceptadas": "Accepted",
+        "Con GPS": "With GPS",
+        "Últimos 7 días": "Last 7 days",
+        "86 tiendas únicas · 6 días activos": "86 unique shops · 6 active days",
+        "#2 equipo": "#2 team",
+        "Reto “Cobertura total”": "“Full coverage” challenge",
+        "Visita 100 tiendas únicas con evidencia completa": "Visit 100 unique shops with complete evidence",
+        "+250 pts al completar": "+250 pts on completion",
+        "Liga de campo": "Field league",
+        "Campaña “Sondeo de Presencia de Marcas”": "Campaign “Brand Presence Survey”",
+        "7 días": "7 days",
+        "Julio": "July",
+        "Cómo se calculan los puntos": "How points are calculated",
+        "Tu actividad": "Your activity",
+        "Datos reales del 7 al 13 de julio": "Real data from July 7–13",
+        "Visitas": "Visits",
+        "Únicas": "Unique",
+        "Días activos": "Active days",
+        "Ritmo diario": "Daily pace",
+        "Promedio: 14,3 visitas por día activo": "Average: 14.3 visits per active day",
+        "Mejor: 24": "Best: 24",
+        "Calidad de evidencia": "Evidence quality",
+        "Evita premiar solo la velocidad": "Avoid rewarding speed alone",
+        "86 aceptadas": "86 accepted",
+        "86 con GPS": "86 with GPS",
+        "86 con foto": "86 with photo",
+        "86 tiendas únicas": "86 unique shops",
+        "Comparación semanal": "Weekly comparison",
+        "Semana completa anterior": "Previous complete week",
+        "86 en los últimos 7 días · 78 en la semana anterior": "86 in the last 7 days · 78 in the previous week",
+        "Retos y logros": "Challenges and achievements",
+        "Reconoce cobertura y calidad, no solo volumen": "Recognize coverage and quality, not only volume",
+        "Reto semanal": "Weekly challenge",
+        "100 tiendas únicas con GPS + foto": "100 unique shops with GPS + photo",
+        "4 días": "4 days",
+        "Premio: 250 pts": "Reward: 250 pts",
+        "Insignias": "Badges",
+        "3 de 4": "3 of 4",
+        "Explorador": "Explorer",
+        "50 tiendas únicas": "50 unique shops",
+        "Ganada": "Earned",
+        "Evidencia pro": "Evidence pro",
+        "100% GPS + foto": "100% GPS + photo",
+        "Constante": "Consistent",
+        "6 días activos": "6 active days",
+        "Cobertura 100": "Coverage 100",
+        "Faltan 14 tiendas": "14 shops remaining",
+        "Cómo ganas puntos": "How you earn points",
+        "Reglas simples que ya pueden calcularse con Results, Answers y Galleries": "Simple rules already calculable from Results, Answers and Galleries",
+        "Visita aceptada": "Accepted visit",
+        "Solo resultados con status = 2": "Only results with status = 2",
+        "Tienda única": "Unique shop",
+        "No premia repeticiones": "Repeated visits do not score",
+        "GPS válido": "Valid GPS",
+        "Evidencia de presencia": "Proof of presence",
+        "Foto adjunta": "Photo attached",
+        "Cruce con Galleries": "Join with Galleries",
+        "Por qué es más justo": "Why it is fairer",
+        "No da puntos a resultados rechazados": "Rejected results earn no points",
+        "Las tiendas repetidas no inflan el ranking": "Repeated shops do not inflate the ranking",
+        "Premia evidencia verificable": "Rewards verifiable evidence",
+        "No recompensa encuestas demasiado rápidas": "Does not reward overly fast surveys",
+        "Volver al ranking": "Back to ranking",
+        "Hoy": "Today",
+        "Actividad": "Activity",
+        "Logros": "Achievements",
+        "Puntos justos": "Fair points",
+        "Tú": "You",
+        "M": "T",
+        "X": "W",
+        "J": "T",
+        "V": "F",
+        "D": "S",
+        "L": "M"
+      };
+
+      const englishAttributes = {
+        "Prototipo Android de gamificación para encuestadores de campo": "Android gamification prototype for field surveyors",
+        "Perfil de Grediel Mery": "Grediel Mery profile",
+        "Idioma de la aplicación": "Application language",
+        "Ver demostración en español": "View demo in Spanish",
+        "Ver demostración en inglés": "View demo in English",
+        "Progreso de meta diaria: 95 por ciento": "Daily goal progress: 95 percent",
+        "Visitas de Grediel del 7 al 13 de julio: 11, 23, 24, 1, 8, 0 y 19": "Grediel visits from July 7 to 13: 11, 23, 24, 1, 8, 0 and 19",
+        "Periodo del ranking": "Ranking period",
+        "Tres primeros del ranking": "Top three in the ranking",
+        "Gráfico de actividad diaria con 86 visitas totales": "Daily activity chart with 86 total visits",
+        "Calidad de evidencia 100 por ciento": "Evidence quality: 100 percent",
+        "86 visitas frente a 78 de la semana anterior": "86 visits compared with 78 in the previous week",
+        "Navegación principal": "Main navigation"
+      };
+
+      const translatableTextNodes = [];
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+      let textNode;
+      while ((textNode = walker.nextNode())) {
+        const parentTag = textNode.parentElement?.tagName;
+        const trimmed = textNode.nodeValue.trim();
+        if (parentTag !== "SCRIPT" && parentTag !== "STYLE" && englishText[trimmed]) {
+          const match = textNode.nodeValue.match(/^(\s*)(.*?)(\s*)$/s);
+          translatableTextNodes.push({
+            node: textNode,
+            prefix: match[1],
+            es: trimmed,
+            en: englishText[trimmed],
+            suffix: match[3]
+          });
+        }
+      }
+
+      const translatableAttributes = [];
+      root.querySelectorAll("[aria-label]").forEach((element) => {
+        const spanish = element.getAttribute("aria-label");
+        if (englishAttributes[spanish]) {
+          translatableAttributes.push({ element, es: spanish, en: englishAttributes[spanish] });
+        }
+      });
+
+      function showScreen(name) {
+        screens.forEach((screen) => {
+          screen.hidden = screen.id !== `fq-${name}`;
+        });
+        navButtons.forEach((button) => {
+          const selected = button.dataset.screen === name || (name === "points" && button.dataset.screen === "ranking");
+          button.classList.toggle("is-selected", selected);
+          button.setAttribute("aria-pressed", String(selected));
+        });
+        title.textContent = screenTitles[currentLanguage][name];
+      }
+
+      function renderLeaders(items) {
+        list.innerHTML = items.map((item) => `
+          <div class="fq-list-row${item.me ? " is-me" : ""}">
+            <span class="fq-rank">${item.rank}</span>
+            <div class="fq-person">
+              <span class="fq-avatar">${item.initials}</span>
+              <div class="fq-person-copy">
+                <div>${currentLanguage === "en" && item.nameEn ? item.nameEn : item.name}${item.me ? ` · ${currentLanguage === "en" ? "You" : "Tú"}` : ""}</div>
+                <div class="text-small fq-muted">${currentLanguage === "en" ? item.detailEn : item.detailEs}</div>
+              </div>
+            </div>
+            <div class="fq-points">
+              <div>${item.points}</div>
+              <div class="text-small fq-muted">pts</div>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      function updatePodium(isMonth) {
+        root.querySelector('[data-podium-initials="third"]').textContent = isMonth ? "AT" : "FA";
+        root.querySelector('[data-podium-name="third"]').textContent = isMonth
+          ? "Alejandro"
+          : (currentLanguage === "en" ? "Agent 162" : "Agente 162");
+        root.querySelector('[data-podium-points="first"]').textContent = isMonth ? "4.549 pts" : "2.919 pts";
+        root.querySelector('[data-podium-points="second"]').textContent = isMonth ? "2.649 pts" : "1.720 pts";
+        root.querySelector('[data-podium-points="third"]').textContent = isMonth ? "2.121 pts" : "1.460 pts";
+      }
+
+      function setLanguage(language) {
+        currentLanguage = language;
+        phone.setAttribute("lang", language);
+        languageButtons.forEach((button) => {
+          const selected = button.dataset.language === language;
+          button.classList.toggle("is-selected", selected);
+          button.setAttribute("aria-pressed", String(selected));
+        });
+        translatableTextNodes.forEach((item) => {
+          item.node.nodeValue = `${item.prefix}${item[language]}${item.suffix}`;
+        });
+        translatableAttributes.forEach((item) => {
+          item.element.setAttribute("aria-label", item[language]);
+        });
+        const activeScreen = screens.find((screen) => !screen.hidden);
+        const activeName = activeScreen.id.replace("fq-", "");
+        title.textContent = screenTitles[language][activeName];
+        const monthSelected = root.querySelector('[data-range="month"]').getAttribute("aria-pressed") === "true";
+        renderLeaders(monthSelected ? monthly : weekly);
+        updatePodium(monthSelected);
+      }
+
+      navButtons.forEach((button) => {
+        button.addEventListener("click", () => showScreen(button.dataset.screen));
+      });
+
+      languageButtons.forEach((button) => {
+        button.addEventListener("click", () => setLanguage(button.dataset.language));
+      });
+
+      ranges.forEach((button) => {
+        button.addEventListener("click", () => {
+          ranges.forEach((peer) => {
+            const selected = peer === button;
+            peer.classList.toggle("is-selected", selected);
+            peer.setAttribute("aria-pressed", String(selected));
+          });
+          const isMonth = button.dataset.range === "month";
+          renderLeaders(isMonth ? monthly : weekly);
+          updatePodium(isMonth);
+        });
+      });
+
+      root.querySelector("#fq-how-points").addEventListener("click", () => showScreen("points"));
+      root.querySelector("#fq-back-ranking").addEventListener("click", () => showScreen("ranking"));
+      renderLeaders(weekly);
+    })();
+  </script>
+</div>
