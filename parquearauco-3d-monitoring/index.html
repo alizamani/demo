@@ -23,7 +23,7 @@ button{font:inherit;color:inherit}
 #stage canvas{display:block}
 #labels{position:fixed;inset:0;pointer-events:none}
 .fx-vignette{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,transparent 55%,rgba(2,4,10,.55) 100%)}
-.fx-grain{position:fixed;inset:-50%;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");animation:grain 1.2s steps(6) infinite}
+.fx-grain{position:fixed;inset:-50%;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
 @keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
 
 /* letterbox */
@@ -37,8 +37,7 @@ body.cine .lb{height:10vh}
 /* intro */
 #intro{position:fixed;inset:0;z-index:40;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;transition:opacity 1.4s}
 #intro.gone{opacity:0}
-#intro h1{margin:0;font-weight:800;font-size:clamp(34px,7vw,96px);letter-spacing:.32em;padding-left:.32em;text-transform:uppercase;color:#eef8ff;text-shadow:0 0 40px rgba(114,230,255,.45),0 0 2px rgba(255,255,255,.6);white-space:nowrap}
-#intro h1 span{display:inline-block;opacity:0;transform:translateY(18px);filter:blur(8px);animation:letter .9s cubic-bezier(.2,.7,.2,1) forwards}
+#intro h1{margin:0;line-height:0;white-space:nowrap}
 @keyframes letter{to{opacity:1;transform:none;filter:none}}
 #intro p{margin:18px 0 0;color:var(--dim);letter-spacing:.42em;text-transform:uppercase;font-size:clamp(10px,1.1vw,13px);opacity:0;animation:fadein 1.2s 1.6s forwards}
 #intro .rule{width:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);margin-top:22px;animation:rule 1.6s 1.2s forwards}
@@ -57,7 +56,47 @@ body.cine .ui.hide-cine{opacity:0;pointer-events:none}
 .glass{background:var(--panel);border:1px solid var(--line);border-radius:14px;backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);box-shadow:0 10px 40px rgba(0,0,0,.35)}
 
 #brand{top:18px;left:20px;display:flex;align-items:center;gap:12px}
-#brand .mk{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,rgba(114,230,255,.25),rgba(169,139,255,.18));border:1px solid var(--line2);display:grid;place-items:center}
+#brand .mk{width:36px;height:36px;border-radius:10px;background:#fff;box-shadow:0 0 0 1px rgba(255,255,255,.2),0 6px 20px rgba(0,0,0,.35),0 0 26px rgba(114,230,255,.18);display:grid;place-items:center;cursor:pointer}
+#brand .mk svg{width:28px;height:28px}
+/* Parque Arauco mark: four pieces that fly in and snap together (same motion as the assistant intro video) */
+.pamark{overflow:visible;display:block}
+/* official wordmark: "Parque" light + "Arauco" bold, real letter shapes, white on dark */
+.pawm{display:inline-flex;align-items:flex-start;color:#fff;line-height:0;vertical-align:top}
+.pawm .w{display:block;overflow:hidden;padding-bottom:.06em}
+.pawm .in{display:block}
+.pawm svg{display:block;height:var(--wh,22px);width:auto}
+#brand .bw{display:block;--wh:21px;margin:1px 0 1px -1px}
+#brand .bw .pawm{filter:drop-shadow(0 0 10px rgba(114,230,255,.18))}
+#intro .pawm{--wh:clamp(46px,8.2vw,104px);filter:drop-shadow(0 0 26px rgba(114,230,255,.32)) drop-shadow(0 2px 2px rgba(0,0,0,.5))}
+#intro .pawm .in{transform:translateY(100%);opacity:0;filter:blur(8px)}
+#intro .pawm.on .in{animation:wordUp .73s cubic-bezier(.22,1,.36,1) forwards;animation-delay:var(--wd,0s)}
+#intro .pawm.on .w:nth-child(2) .in{animation-delay:calc(var(--wd,0s) + .2s)}
+@keyframes wordUp{to{transform:none;opacity:1;filter:none}}
+/* lighter look for slower devices: no live blur behind panels (it is redrawn every frame over the 3D view) */
+.lite .glass,.lite .flbl{backdrop-filter:none;-webkit-backdrop-filter:none}
+.lite .glass{background:rgba(9,14,27,.92)}
+.lite .flbl{background:rgba(8,13,26,.86)}
+.lite .fx-grain{display:none}
+/* Powered by BeQuarks: under the intro logo and in the footer (white BeQuarks logo, embedded) */
+.bqlogo{display:block;height:var(--bh,30px);aspect-ratio:322/150;background:center/contain no-repeat url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUIAAACWCAYAAACrdYERAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAACOVpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDIzLTA2LTAyVDE1OjIwOjMzKzA0OjMwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMy0wNi0wNVQxNTowNDo0NiswNDozMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyMy0wNi0wNVQxNTowNDo0NiswNDozMCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo5NzRFM0ZGNDAzOEMxMUVFQkFFNjlDNDAzOTA4Nzg1RiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo5NzRFM0ZGNTAzOEMxMUVFQkFFNjlDNDAzOTA4Nzg1RiIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOkJCN0IyMDNDREExMDExRTk4MzQwQkI4Q0Y4MzI5ODc2IiBkYzpmb3JtYXQ9ImltYWdlL3BuZyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOmEzZDViY2M0LTgxNzUtNzk0ZS1hODdmLThhMzIyZjAwN2JiNiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpCQjdCMjAzQ0RBMTAxMUU5ODM0MEJCOENGODMyOTg3NiIgc3RSZWY6b3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOkJCN0IyMDNDREExMDExRTk4MzQwQkI4Q0Y4MzI5ODc2Ii8+IDx4bXBNTTpIaXN0b3J5PiA8cmRmOlNlcT4gPHJkZjpsaSBzdEV2dDphY3Rpb249InNhdmVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOmViMDIzMGIzLWNmNGEtZGM0My1iZDAyLTcwZmFjOWJmZDZhZSIgc3RFdnQ6d2hlbj0iMjAyMy0wNi0wMlQyMDoxOTozNiswNDozMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgc3RFdnQ6Y2hhbmdlZD0iLyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0iY29udmVydGVkIiBzdEV2dDpwYXJhbWV0ZXJzPSJmcm9tIGltYWdlL3BuZyB0byBhcHBsaWNhdGlvbi92bmQuYWRvYmUucGhvdG9zaG9wIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJkZXJpdmVkIiBzdEV2dDpwYXJhbWV0ZXJzPSJjb252ZXJ0ZWQgZnJvbSBpbWFnZS9wbmcgdG8gYXBwbGljYXRpb24vdm5kLmFkb2JlLnBob3Rvc2hvcCIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6OTdjYzRlYzAtYWMwMC0zNjRhLTgzODctYTM0Zjdk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)}
+.pow{display:flex;align-items:center;gap:10px;color:var(--dim);font-size:11px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+#intro .pow{margin-top:26px;--bh:clamp(30px,3.6vw,42px);opacity:0;transform:translateY(10px);transition:opacity .9s,transform .9s cubic-bezier(.22,1,.36,1)}
+#intro .pow.on{opacity:.92;transform:none}
+#footer{display:flex;right:20px;bottom:22px;width:360px;justify-content:flex-end;--bh:30px;padding:0 4px}
+#footer{pointer-events:none}
+#footer .pow{opacity:.75;transition:opacity .25s;pointer-events:auto}
+#footer .pow:hover{opacity:1}
+#intro .imark{position:relative;width:min(132px,22vw);height:min(132px,22vw);margin-bottom:34px}
+#intro .imark .pamark{position:relative;width:100%;height:100%;filter:drop-shadow(0 10px 30px rgba(0,0,0,.45))}
+#intro .imark .disc{position:absolute;inset:-18%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.96) 62%,rgba(255,255,255,0) 100%);opacity:0;transform:scale(.6);animation:disc 1.2s .45s cubic-bezier(.2,.8,.2,1) forwards}
+#intro .imark .conic{position:absolute;inset:-75%;border-radius:50%;background:conic-gradient(from 0deg,rgba(83,172,78,.55),rgba(1,101,172,.55),rgba(0,20,137,.5),rgba(239,65,56,.55),rgba(83,172,78,.55));filter:blur(30px);opacity:0;animation:fadein 1.6s .5s forwards,spin 9s linear infinite}
+@keyframes disc{to{opacity:1;transform:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* cloud veil at the start: soft clouds that open up and fade as the camera dives */
+#veil{position:fixed;inset:0;z-index:32;pointer-events:none;overflow:hidden;transition:opacity 1.6s}
+#veil i{position:absolute;border-radius:50%;background:radial-gradient(closest-side,rgba(196,210,236,.9),rgba(150,168,204,.55) 45%,rgba(120,138,180,0) 100%);filter:blur(18px);animation:veil 4.2s cubic-bezier(.5,0,.3,1) forwards}
+#veil.gone{opacity:0}
+@keyframes veil{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--vx),var(--vy)) scale(2.4);opacity:0}}
 #brand b{display:block;font-size:13px;letter-spacing:.24em;font-weight:700}
 #brand small{display:block;font-size:11px;color:var(--dim);margin-top:2px;letter-spacing:.02em}
 #brand .demo{font-family:var(--mono);font-size:10px;color:var(--warn);border:1px solid rgba(255,182,72,.35);border-radius:6px;padding:2px 6px;margin-left:4px;letter-spacing:.06em}
@@ -188,15 +227,17 @@ body.panel-open #toasts{right:392px}
 #err{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:60;background:var(--bg);color:var(--dim);text-align:center;padding:24px;font-size:14px;line-height:1.6}
 
 @media (max-width:900px){
-  #floors{top:auto;bottom:74px;left:12px;right:12px;transform:none;width:auto;flex-direction:row;overflow-x:auto;padding:6px}
+  #floors{top:auto;bottom:92px;left:12px;right:12px;transform:none;width:auto;flex-direction:row;overflow-x:auto;padding:6px}
   body.pre #floors{transform:translateY(14px)}
   .fbtn{grid-template-columns:auto auto;padding:6px 10px;gap:6px}
   .fbtn .t span,.fsep{display:none}
   .fbtn .t{font-size:11px;white-space:nowrap}
-  #panel{left:12px;right:12px;width:auto;top:auto;bottom:140px;height:38vh}
+  #panel{left:12px;right:12px;width:auto;top:auto;bottom:158px;height:38vh}
   #crumbs{display:none}
   #legend{display:none}
-  #tools{left:12px;right:12px;transform:none;bottom:12px;overflow-x:auto;justify-content:flex-start}
+  #footer{left:12px;right:12px;width:auto;bottom:6px;justify-content:center;--bh:20px}
+  #footer .pow{font-size:9.5px;gap:7px}
+  #tools{left:12px;right:12px;transform:none;bottom:30px;overflow-x:auto;justify-content:flex-start}
   body.pre #tools{transform:translateY(14px)}
   .tb kbd{display:none}
   #brand{left:12px;top:12px} #brand small{display:none}
@@ -219,8 +260,23 @@ addEventListener('error', e => { window.__errs.push(String(e.message || e.error)
 addEventListener('unhandledrejection', e => { window.__errs.push(String(e.reason)); });
 </script>
 <script type="importmap">
-{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
 </script>
+<!-- fetch every module in parallel (no waterfall of nested imports) -->
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/postprocessing/EffectComposer.js">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/postprocessing/RenderPass.js">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/postprocessing/UnrealBloomPass.js">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/postprocessing/OutputPass.js">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/postprocessing/ShaderPass.js">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/postprocessing/Pass.js">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/postprocessing/MaskPass.js">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/shaders/CopyShader.js">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/shaders/LuminosityHighPassShader.js">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/shaders/OutputShader.js">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/renderers/CSS2DRenderer.js">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/utils/BufferGeometryUtils.js">
 </head>
 <body class="pre">
 <div id="stage"></div>
@@ -232,16 +288,19 @@ addEventListener('unhandledrejection', e => { window.__errs.push(String(e.reason
 <div class="lb bot"><div class="cap" id="cap"></div></div>
 
 <div id="loading" data-i18n="loading">CARGANDO MODELO…</div>
+<div id="veil"></div>
 <div id="intro">
+  <div class="imark"><i class="conic"></i><i class="disc"></i></div>
   <h1 id="introTitle"></h1>
   <div class="rule"></div>
   <p data-i18n="introSub">Gemelo digital · Sensores en tiempo real</p>
+  <div class="pow"><span data-i18n="poweredBy">Desarrollado por</span><span class="bqlogo" role="img" aria-label="BeQuarks"></span></div>
 </div>
 <button id="skip" data-i18n="skip">Saltar intro ›</button>
 
 <div id="brand" class="ui left hide-cine">
-  <div class="mk"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#72e6ff" stroke-width="1.6"><path d="M3 20h18M5 20V9l7-5 7 5v11M9 20v-5h6v5"/><path d="M12 8.5v.01" stroke-linecap="round" stroke-width="2.4"/></svg></div>
-  <div><b>PARQUE ARAUCO</b><small><span data-i18n="brandSub">Gemelo digital · Operaciones y aseo</span> <span class="demo" data-i18n="demo">DEMO · DATOS SIMULADOS</span></small></div>
+  <div class="mk" title="Parque Arauco"></div>
+  <div><b class="bw"></b><small><span data-i18n="brandSub">Gemelo digital · Operaciones y aseo</span> <span class="demo" data-i18n="demo">DEMO · DATOS SIMULADOS</span></small></div>
 </div>
 
 <nav id="crumbs" class="ui glass hide-cine"></nav>
@@ -271,6 +330,7 @@ addEventListener('unhandledrejection', e => { window.__errs.push(String(e.reason
   <span><i class="cap" style="color:#c9b9a6;background:#c9b9a6"></i><b data-i18n="lgVisitors">Visitantes</b></span>
 </div>
 
+<footer id="footer" class="ui right hide-cine"><div class="pow"><span data-i18n="poweredBy">Desarrollado por</span><span class="bqlogo" role="img" aria-label="BeQuarks"></span></div></footer>
 <div id="tools" class="ui glass">
   <button class="tb primary" data-toggle="tour" aria-pressed="false"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l12-7z"/></svg><span id="tourTxt">Recorrido</span> <kbd>T</kbd></button>
   <button class="tb" data-toggle="explode" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7l8-4 8 4-8 4zM4 12l8 4 8-4M4 17l8 4 8-4"/></svg><span data-i18n="explode">Explotar</span> <kbd>E</kbd></button>
@@ -316,7 +376,7 @@ const mix = (a, b, t) => new THREE.Color(a).lerp(new THREE.Color(b), t);
 const LANGS = ['es', 'en'];
 const T = {
   es: {
-    loading: 'CARGANDO MODELO…', introSub: 'Gemelo digital · Sensores en tiempo real', skip: 'Saltar intro ›',
+    loading: 'CARGANDO MODELO…', introSub: 'Gemelo digital · Sensores en tiempo real', poweredBy: 'Desarrollado por', skip: 'Saltar intro ›',
     brandSub: 'Gemelo digital · Operaciones y aseo', demo: 'DEMO · DATOS SIMULADOS', live: 'EN VIVO',
     lgOk: 'Libre / OK', lgBusy: 'Ocupado', lgWarn: 'Advertencia', lgAlert: 'Alerta', lgCounter: 'Cuenta personas', lgBeacon: 'Beacon de aseo', lgStaff: 'Auxiliar de aseo', lgVisitors: 'Visitantes',
     tour: 'Recorrido', stop: 'Detener', explode: 'Explotar', heat: 'Mapa de calor', people: 'Personas', labels: 'Etiquetas',
@@ -369,7 +429,7 @@ const T = {
     tc7: a => `Auxiliares con tracker: <b>cada alerta se asigna y se cierra sola</b> · adherencia ${a} %`,
   },
   en: {
-    loading: 'LOADING MODEL…', introSub: 'Digital twin · Real-time sensors', skip: 'Skip intro ›',
+    loading: 'LOADING MODEL…', introSub: 'Digital twin · Real-time sensors', poweredBy: 'Powered by', skip: 'Skip intro ›',
     brandSub: 'Digital twin · Operations & cleaning', demo: 'DEMO · SIMULATED DATA', live: 'LIVE',
     lgOk: 'Free / OK', lgBusy: 'Occupied', lgWarn: 'Warning', lgAlert: 'Alert', lgCounter: 'People counter', lgBeacon: 'Cleaning beacon', lgStaff: 'Cleaning staff', lgVisitors: 'Visitors',
     tour: 'Tour', stop: 'Stop', explode: 'Explode', heat: 'Heat map', people: 'People', labels: 'Labels',
@@ -455,11 +515,30 @@ try {
   $('#err').style.display = 'flex'; $('#err').textContent = tr('noWebgl');
   throw e;
 }
-const PR = Math.min(devicePixelRatio, 1.5);
+/* Quality. We start from what the device is, then adapt to the real frame time (see quality()).
+   Tier 2 = desktop GPU, 1 = laptop with built-in graphics, 0 = phone / tablet / very slow. */
+const GPU_NAME = (() => { try { const gl = renderer.getContext(), e = gl.getExtension('WEBGL_debug_renderer_info'); return e ? gl.getParameter(e.UNMASKED_RENDERER_WEBGL) : ''; } catch (e) { return ''; } })();
+// a touch-screen laptop still has a mouse/touchpad ("any-pointer: fine"); a phone or tablet does not
+const IS_MOBILE = /Android|iPhone|iPad|Mobile/i.test(navigator.userAgent) || (matchMedia('(pointer:coarse)').matches && !matchMedia('(any-pointer:fine)').matches && Math.min(screen.width, screen.height) < 820);
+const IS_SOFT = /swiftshader|llvmpipe|software|basic render/i.test(GPU_NAME);
+const IS_IGPU = /intel|radeon\W*(tm\W*)?graphics|radeon vega|vega \d|mali|adreno|powervr|apple gpu|uhd|iris/i.test(GPU_NAME);
+const TIER0 = IS_SOFT || IS_MOBILE ? 0 : IS_IGPU ? 1 : 2;
+const Q = {
+  tier: TIER0, maxTier: TIER0,
+  scale: 1,            // dynamic resolution, 0.55 … 1
+  ft: 16.7,            // smoothed frame time (ms)
+  slow: 0, fast: 0,    // seconds spent below / above the target
+};
+const PIXEL_BUDGET = [0.75e6, 1.3e6, 2.4e6]; // canvas pixels per tier (1920×1080 ≈ 2.07 M)
+function basePR() { return Math.min(devicePixelRatio, Q.tier === 2 ? 1.5 : 1.25, Math.sqrt(PIXEL_BUDGET[Q.tier] / (innerWidth * innerHeight))); }
+let PR = Math.max(.5, basePR() * Q.scale);
 renderer.setPixelRatio(PR);
 renderer.setSize(innerWidth, innerHeight);
 renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.shadowMap.type = Q.tier === 2 ? THREE.PCFSoftShadowMap : THREE.PCFShadowMap;
+// The sun and every shadow caster are still most of the time: draw the shadow map only when something moves.
+renderer.shadowMap.autoUpdate = false; renderer.shadowMap.needsUpdate = true;
+if (Q.tier < 2) document.documentElement.classList.add('lite');
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.08;
 $('#stage').appendChild(renderer.domElement);
@@ -496,7 +575,8 @@ controls.minDistance = 5;
 controls.maxDistance = 650;
 controls.autoRotateSpeed = 0.35;
 
-const rt = new THREE.WebGLRenderTarget(innerWidth * PR, innerHeight * PR, { type: THREE.HalfFloatType, samples: 4 });
+const MSAA = [0, 2, 4];
+const rt = new THREE.WebGLRenderTarget(innerWidth * PR, innerHeight * PR, { type: THREE.HalfFloatType, samples: MSAA[Q.tier] });
 const composer = new EffectComposer(renderer, rt);
 composer.setPixelRatio(PR);
 composer.setSize(innerWidth, innerHeight);
@@ -511,15 +591,18 @@ composer.addPass(new ShaderPass({
       gl_FragColor = vec4(min(c.rgb, vec3(24.0)), c.a); }`,
 }));
 const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 0.75, 0.55, 0.82);
+// Glow is soft anyway: compute it at a lower resolution (looks the same, costs a fraction).
+{ const setSize = bloom.setSize.bind(bloom); bloom.setSize = (w, h) => setSize(Math.max(64, Math.round(w * (Q.tier === 2 ? .6 : .5))), Math.max(64, Math.round(h * (Q.tier === 2 ? .6 : .5)))); }
 composer.addPass(bloom);
 composer.addPass(new OutputPass());
 
 /* Lights: dusk sun from the west, cool sky fill */
-scene.add(new THREE.HemisphereLight(0x8ea6ff, 0x1c140e, 0.62));
-const sun = new THREE.DirectionalLight(0xffd2a8, 1.9);
+scene.add(new THREE.HemisphereLight(0x8ea6ff, 0x1c140e, 0.42));
+const sun = new THREE.DirectionalLight(0xffd2a8, 2.1);
 sun.position.set(-150, 95, 70);
 sun.castShadow = true;
-sun.shadow.mapSize.set(2048, 2048);
+const SHADOW = Q.tier === 0 ? 1024 : 2048;
+sun.shadow.mapSize.set(SHADOW, SHADOW);
 Object.assign(sun.shadow.camera, { left: -95, right: 95, top: 95, bottom: -95, near: 10, far: 520 });
 sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.04;
 scene.add(sun);
@@ -583,6 +666,88 @@ function textTexture(text, { w = 2048, h = 256, size = 150, weight = 800, spacin
   const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4; return t;
 }
 
+/** Small generated texture. `scale` is the repeat per world unit (for geometry whose UVs are in metres). */
+function canvasTex(n, draw, scale = 1, srgb = true, wrap = true) {
+  const c = document.createElement('canvas'); c.width = c.height = n; const g = c.getContext('2d'); draw(g, n);
+  const t = new THREE.CanvasTexture(c); if (srgb) t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8;
+  if (wrap) { t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(scale, scale); }
+  return t;
+}
+/** Add fine grain to a canvas (± amp per pixel). */
+function noise(g, n, amp) {
+  const im = g.getImageData(0, 0, n, n), d = im.data;
+  for (let k = 0; k < d.length; k += 4) { const v = (Math.random() - .5) * 2 * amp; d[k] += v; d[k + 1] += v; d[k + 2] += v; }
+  g.putImageData(im, 0, 0);
+}
+
+/* ============================================================
+   Parque Arauco mark: the official four-piece logo
+   (paths copied from tools/mcp-intro-video/src/icons.tsx, viewBox 0 0 182 182)
+   ============================================================ */
+const PA_PIECES = [
+  { fill: '#53ac4e', t: [394.4336, 431.2266], d: 'M 0,0 C -17.887,1.687 -36.356,-4.482 -50.268,-18.393 -66.082,-34.207 -72.148,-56.179 -67.98,-76.415 -31.865,-68.007 -4.222,-37.549 0,0', from: [70, -30, 40] },
+  { fill: '#53ac4e', t: [218.1157, 430.7964], d: 'm 0,0 c 4.444,-37.867 32.722,-68.44 69.43,-76.315 4.419,20.079 -1.367,41.842 -17.216,57.69 C 37.904,-4.313 18.548,2.013 0,0', from: [-70, -30, -40] },
+  { fill: '#0165ac', t: [306.25, 530], d: 'm 0,0 c -49.015,0 -88.75,-39.735 -88.75,-88.75 0,-0.218 0.007,-0.435 0.008,-0.653 2.908,0.36 5.863,0.567 8.868,0.567 6.219,0 12.253,-0.964 18.005,-2.713 2.527,31.969 29.251,57.13 61.869,57.13 32.805,0 59.649,-25.45 61.91,-57.68 6.311,2.12 12.706,3.263 18.883,3.263 2.688,0 5.339,-0.161 7.95,-0.45 0.001,0.179 0.007,0.357 0.007,0.536 C 88.75,-39.735 49.016,0 0,0', from: [0, -70, 0] },
+  { fill: '#ef4138', t: [315.501, 369.623], d: 'm 0,0 c 0,28.716 20.514,53.476 44.279,64.864 l 0,10e-4 c -0.508,28.901 -24.08,52.177 -53.103,52.177 -28.942,0 -52.461,-23.145 -53.098,-51.934 21.775,-10.431 38.092,-32.022 42.692,-53.295 0.026,-0.006 0.054,-0.009 0.081,-0.014 0.857,-3.97 1.316,-7.928 1.316,-11.8 0,-5.692 -0.685,-11.222 -1.941,-16.53 3.54,-0.714 7.202,-1.092 10.953,-1.092 3.686,0 7.286,0.369 10.769,1.06 l 0,0 C 0.688,-11.244 0,-5.704 0,0', from: [0, 80, 0] },
+];
+/* The "ParqueArauco" wordmark: the real letter shapes from the official logo file
+   (Logo_Parque_Arauco.svg), in the same coordinates as the mark. "Parque" is light, "Arauco" is bold. */
+const PA_WORD = {"parque":[{"t":[143.9063,311.3574],"d":"m 0,0 c 0,0 3.142,-0.139 4.813,-0.139 6.047,0 9.748,2.984 9.748,8.739 0,5.69 -3.621,8.105 -9.092,8.105 C 3.28,16.705 0,16.565 0,16.565 Z m -4.331,20.329 9.612,0 c 4.954,0 8.134,-0.91 10.438,-3.186 2.073,-2.024 3.25,-4.769 3.25,-8.563 0,-3.856 -0.729,-5.85 -2.688,-8.062 C 13.574,-2.581 9.607,-3.67 4.712,-3.67 l -4.868,-0.058 0,-17.833 -4.175,0 z"},{"t":[182.917,305.3037],"d":"m 0,0 c -6.805,0.138 -15.218,-1.025 -15.218,-7.451 0,-3.966 2.64,-5.519 5.759,-5.519 4.536,0 7.497,1.51 8.49,4.314 0.212,0.682 1.011,3.096 1.011,3.643 z m 4.209,-15.436 -3.667,-0.071 -0.042,4.744 -0.651,-0.994 c -1.555,-2.403 -4.912,-4.375 -8.887,-4.375 -6.463,0 -10.338,2.995 -10.338,8.578 0,8.124 7.762,10.739 18.533,10.675 L 0.083,3.112 c 0,2.466 0.751,9.397 -7.156,9.397 -2.65,0 -6.552,-1.045 -8.51,-2.5 l -0.021,3.5 c 2.382,1.206 5.702,2.29 9.216,2.29 8.524,0 10.44,-5.446 10.44,-12.456 l 0,-14.147 z"},{"t":[192.8125,310.2266],"d":"m 0,0 c 0,3.604 -0.058,7.272 -0.23,10.117 l 3.592,0 0,-6.638 0.173,0 c 1.267,4.109 4.338,7.169 7.736,7.169 0.519,0 2.417,-0.229 2.875,-0.468 l 0,-3.707 C 13.628,6.599 12.521,6.712 10.964,6.712 7.394,6.712 4.859,3.804 4.168,-0.369 4.053,-1.128 3.995,-3.857 3.995,-4.742 l 0,-15.86 -3.995,0 z"},{"t":[228.771,307.8955],"d":"m 0,0 c 0,0.833 -0.372,2.146 -0.563,2.908 -0.889,3.744 -3.81,6.934 -8,6.934 -5.778,0 -9.27,-5.34 -9.27,-12.828 0,-6.727 2.92,-12.481 9.079,-12.481 3.619,0 6.731,2.427 8.001,6.587 0.254,0.901 0.857,2.852 0.857,3.755 z m 0.292,-12.942 -0.459,-0.496 c -1.554,-2.971 -3.666,-5.419 -9.838,-5.419 -6.508,0 -11.808,6.132 -11.808,15.427 0,11.508 4.667,16.503 12.614,16.503 4.321,0 7.592,-2.154 8.975,-5.062 l 0.469,-0.532 -0.016,4.962 4.223,0 C 4.337,9.911 4.222,7.193 4.222,4.032 l 0,-34.713 -3.93,0 z"},{"t":[262.7236,298.2129],"d":"m 0,0 c 0,-3.225 0.058,-6.007 0.231,-8.409 l -3.781,0 0,5.462 -0.392,-0.672 c -1.267,-2.466 -3.657,-5.486 -9.939,-5.486 -5.53,0 -10.03,2.719 -10.03,13.404 l 0,17.894 4,0 0,-16.881 c 0,-9.712 3.15,-11.15 7.701,-11.15 4.799,0 6.877,3.941 7.799,6.47 0.288,0.759 0.461,1.771 0.461,2.846 l 0,18.715 3.95,0 z"},{"t":[287.5806,307.292],"d":"m 0,0 c 0.065,4.063 -1.498,10.488 -7.941,10.488 -5.858,0 -8.332,-5.982 -8.788,-10.488 z m -16.581,-3.269 c 0.116,-7.523 4.78,-11.617 9.907,-11.617 3.628,0 6.844,1.271 8.687,2.157 L 1.88,-16.427 c -1.786,-0.885 -4.621,-1.827 -9.056,-1.827 -8.582,0 -13.708,6.261 -13.708,15.492 0,9.231 4.953,16.439 13.074,16.439 9.917,0 11.917,-8.725 11.917,-14.353 0,-1.137 0.115,-1.96 0,-2.593 z"}],"arauco":[{"t":[318.542,306.041],"d":"m 0,0 c 0,0 -5.224,14.611 -5.906,17.115 l -0.136,0 C -6.724,14.611 -11.834,0 -11.834,0 Z m -14.042,-6.957 -3.833,-9.522 -9.026,0 16.276,42.188 9.667,0 16.36,-42.188 -9.482,0 -5.711,15.885 z"},{"t":[335.9131,310.5293],"d":"m 0,0 c 0,4.43 -0.062,7.321 -0.246,9.905 l 7.177,0 0,-6.716 0.375,1.188 c 1.538,4.43 5.098,6.427 8.812,6.427 0.861,0 1.189,-0.037 1.865,-0.16 L 18.004,2.283 C 17.4,2.825 15.945,2.971 14.899,2.971 10.462,2.971 8.953,0.154 8.338,-2.737 8.215,-3.353 8.025,-4.874 8.025,-5.612 l -0.123,-15.355 -7.902,0 z"},{"t":[373.7217,304.0176],"d":"m 0,0 c -8.878,0.264 -12.271,-1.643 -12.271,-4.903 0,-2.716 2.056,-4.226 4.95,-4.226 2.599,0 4.756,1.236 6.131,3.361 0.316,0.49 1.062,2.341 1.085,2.966 z m 7.516,-6.455 c 0,-2.83 0.123,-6.275 0.492,-7.937 l -7.292,0 -0.313,4.624 -0.375,-0.375 c -1.968,-2.399 -4.812,-4.811 -10.047,-4.811 -6.09,0 -10.119,4.386 -10.119,9.184 0,8.541 6.583,10.835 20.083,10.584 l -0.042,1.417 c 0,3 -2.468,5.125 -7.083,5.125 -3.076,0 -7.297,-2.102 -9.265,-3.333 l 0,6.952 c 2.052,0.934 5.456,2.34 10.931,2.34 10.029,0 12.784,-4.832 12.784,-13.25 z"},{"t":[414.1348,299.9619],"d":"m 0,0 c 0,-3.938 0.123,-7.813 0.246,-10.336 l -7.725,0 0,4.343 -0.375,0 c -1.168,-1.846 -4.635,-4.905 -10.049,-4.905 -6.153,0 -10.263,4.03 -10.263,11.033 l 0,20.291 7.984,0 0,-16.181 c 0,-5.499 1.046,-8.916 5.464,-8.916 3.917,0 5.495,3.687 6.049,5.163 0.246,0.554 0.369,1.231 0.369,2.03 l 0,17.904 8.3,0 z"},{"t":[440.625,290.2188],"d":"m 0,0 c -1.694,-0.815 -5.147,-1.155 -8.787,-1.155 -9.913,0 -14.422,6.837 -14.422,16.436 0,8.973 4.32,15.565 15.74,15.565 2.51,0 4.834,-0.285 6.842,-1.038 L -1.125,23.75 c -1.129,0.502 -2.99,1.114 -5.5,1.114 -5.021,0 -8.25,-4.936 -8.188,-9.956 0,-5.585 3.711,-9.627 8.354,-9.627 2.259,0 4.826,0.373 6.269,1 z"},{"t":[449.333,305.084],"d":"m 0,0 c 0,-5.597 2.782,-9.795 7.952,-9.795 4.772,0 7.715,3.932 7.715,9.861 0,4.797 -2.228,9.729 -7.715,9.729 C 2.227,9.795 0,4.797 0,0 m 23.599,0.313 c 0,-11.216 -7.958,-16.355 -16.167,-16.355 -8.961,0 -15.855,5.891 -15.855,15.791 0,9.964 6.518,16.293 16.418,16.293 9.337,0 15.604,-6.454 15.604,-15.729"}],"reg":[{"t":[474.416,326.9443],"d":"m 0,0 c -4.326,0 -7.833,3.507 -7.833,7.833 0,4.326 3.507,7.833 7.833,7.833 4.326,0 7.833,-3.507 7.833,-7.833 C 7.833,3.507 4.326,0 0,0 m 0,17.666 c -5.431,0 -9.833,-4.402 -9.833,-9.833 C -9.833,2.402 -5.431,-2 0,-2 c 5.431,0 9.833,4.402 9.833,9.833 0,5.431 -4.402,9.833 -9.833,9.833"},{"t":[472.2852,335.4082],"d":"M 0,0 2.229,0 C 4.474,0 5.24,0.861 5.24,1.907 5.24,2.953 4.474,3.799 2.229,3.799 L 0,3.799 Z m 0,-6.075 -1.254,0 0,10.888 3.795,0 c 2.508,0 4.058,-0.953 4.058,-2.906 0,-1.508 -1.132,-2.661 -3.152,-2.815 l 3.552,-5.167 -1.532,0 -3.378,5.059 -2.089,0 z"}]};
+const PA_WORD_BOX = { parque: [137, 293], arauco: [291.6, 487], y: [185, 257] }; // x ranges and y range (y down)
+const glyphs = list => list.map(p => `<path transform="translate(${p.t[0]},${p.t[1]})" d="${p.d}"/>`).join('');
+function wordSVG(part) {
+  const [x0, x1] = PA_WORD_BOX[part], [y0, y1] = PA_WORD_BOX.y;
+  return `<svg class="paword ${part}" viewBox="${x0} ${y0} ${x1 - x0} ${y1 - y0}" fill="currentColor" aria-hidden="true"><g transform="matrix(1,0,0,-1,0,532)">${glyphs(PA_WORD[part])}${part === 'arauco' ? glyphs(PA_WORD.reg) : ''}</g></svg>`;
+}
+/** Full wordmark; each word sits in its own mask so it can rise into place (like the video's text reveal). */
+const wordmarkHTML = () => `<span class="pawm" role="img" aria-label="Parque Arauco"><span class="w"><span class="in">${wordSVG('parque')}</span></span><span class="w"><span class="in">${wordSVG('arauco')}</span></span></span>`;
+
+function markSVG() {
+  return `<svg class="pamark" viewBox="0 0 182 182" aria-label="Parque Arauco" role="img">${PA_PIECES.map(p =>
+    `<g class="pc" opacity="0"><g transform="matrix(1,0,0,-1,-215.5,532)"><path fill="${p.fill}" transform="translate(${p.t[0]},${p.t[1]})" d="${p.d}"/></g></g>`).join('')}</svg>`;
+}
+/* Same spring as the video (Remotion spring: stiffness 120, damping 13, mass 1). */
+const SPR_W = Math.sqrt(120), SPR_A = 13 / 2, SPR_D = Math.sqrt(SPR_W * SPR_W - SPR_A * SPR_A);
+const sprAt = t => t <= 0 ? 0 : 1 - Math.exp(-SPR_A * t) * (Math.cos(SPR_D * t) + SPR_A / SPR_D * Math.sin(SPR_D * t));
+/** Piece i starts at frame 4 + 4i (30 fps), flies in from its offset, turns and grows from 35 %, like the video. */
+function markPose(svg, t) {
+  svg.querySelectorAll('.pc').forEach((g, i) => {
+    const k = sprAt(t - (4 + i * 4) / 30), u = 1 - k, [dx, dy, r] = PA_PIECES[i].from, s = .35 + .65 * k;
+    g.setAttribute('transform', `translate(${(dx * u).toFixed(2)},${(dy * u).toFixed(2)}) rotate(${(r * u).toFixed(2)} 91 91) translate(91 91) scale(${s.toFixed(4)}) translate(-91 -91)`);
+    g.setAttribute('opacity', clamp(k * 1.6, 0, 1).toFixed(3));
+  });
+}
+/** Play the snap-together animation of a mark (again). */
+function playMark(svg) {
+  if (!svg) return;
+  if (REDUCED) { markPose(svg, 9); return; }
+  const id = (svg._play = (svg._play || 0) + 1), t0 = performance.now();
+  const run = () => { if (svg._play !== id) return; const t = (performance.now() - t0) / 1000; markPose(svg, t); if (t < 2) requestAnimationFrame(run); };
+  run();
+}
+/** Restart the word reveal of a wordmark (the CSS does the motion). */
+function playWord(el, delay = 0) { if (!el) return; el.classList.remove('on'); void el.getBoundingClientRect(); el.style.setProperty('--wd', delay + 's'); el.classList.add('on'); }
+/** One piece drawn alone on a transparent canvas (for the lit sign on the facade). */
+function markPieceTexture(i, size = 512) {
+  const c = document.createElement('canvas'); c.width = c.height = size; const g = c.getContext('2d'), p = PA_PIECES[i], s = size / 182;
+  g.setTransform(s, 0, 0, s, 0, 0); g.transform(1, 0, 0, -1, -215.5, 532); g.translate(p.t[0], p.t[1]);
+  g.shadowColor = p.fill; g.shadowBlur = 18; g.fillStyle = p.fill; const path = new Path2D(p.d); g.fill(path); g.shadowBlur = 0; g.fill(path);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4; return t;
+}
+/** The white wordmark on a transparent canvas, with a soft glow (facade sign). */
+function wordmarkTexture(w = 2048) {
+  const [x0, x1] = [PA_WORD_BOX.parque[0], PA_WORD_BOX.arauco[1]], [y0, y1] = PA_WORD_BOX.y, s = w / (x1 - x0), h = Math.ceil((y1 - y0) * s);
+  const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d');
+  const draw = () => { for (const p of [...PA_WORD.parque, ...PA_WORD.arauco, ...PA_WORD.reg]) { g.save(); g.setTransform(s, 0, 0, s, -x0 * s, -y0 * s); g.transform(1, 0, 0, -1, 0, 532); g.translate(p.t[0], p.t[1]); g.fill(new Path2D(p.d)); g.restore(); } };
+  g.fillStyle = '#ffffff'; g.shadowColor = '#9fe8ff'; g.shadowBlur = 34; draw(); g.shadowBlur = 0; draw();
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t;
+}
+document.querySelector('#intro .imark').insertAdjacentHTML('beforeend', markSVG());
+document.querySelector('#introTitle').innerHTML = wordmarkHTML();
+document.querySelector('#brand .mk').innerHTML = markSVG();
+document.querySelector('#brand .bw').innerHTML = wordmarkHTML();
+document.querySelector('#brand .mk').addEventListener('pointerenter', e => playMark(e.currentTarget.querySelector('svg')));
+
 /* ============================================================
    Data model: floors, sections, sensors
    ============================================================ */
@@ -628,7 +793,21 @@ function makeMats() {
   };
   m.glass.userData.base = 0.16; m.facade.userData.base = 0.075; m.line.userData.base = 0.9; m.lineDim.userData.base = 0.5;
   m.glass.userData.alwaysT = m.facade.userData.alwaysT = m.line.userData.alwaysT = m.lineDim.userData.alwaysT = true;
+  m.solid.envMapIntensity = .55;
+  fresnelGlass(m.glass, 1.6, 1.4); fresnelGlass(m.facade, 4.2, 2.2);
   return m;
+}
+/* Real glass gets more reflective at grazing angles (Fresnel). We add that to the alpha, scaled by the
+   current opacity, so the floor fade still works. A uniform keeps one shader program for all floors. */
+function fresnelGlass(mat, k, env) {
+  mat.envMapIntensity = env;
+  mat.onBeforeCompile = sh => {
+    sh.uniforms.uFres = { value: k };
+    sh.fragmentShader = 'uniform float uFres;\n' + sh.fragmentShader.replace('#include <dithering_fragment>',
+      `#include <dithering_fragment>
+      { float fr = pow(1.0 - clamp(abs(dot(normalize(vViewPosition), normal)), 0.0, 1.0), 3.0);
+        gl_FragColor.a = min(1.0, gl_FragColor.a + fr * uFres * opacity * 0.5); }`);
+  };
 }
 const pickMat = new THREE.MeshBasicMaterial({ visible: false });
 
@@ -966,8 +1145,18 @@ function buildFloor(i) {
     for (const p of [0, .35, .7]) { const pp = p * Math.PI / 2; for (let k = 0; k < 64; k++) { const a1 = k / 64 * TAU, a2 = (k + 1) / 64 * TAU; ribs.push(Math.cos(a1) * Math.cos(pp) * (RX + 1), FH + Math.sin(pp) * 5, Math.sin(a1) * Math.cos(pp) * (RZ + 1), Math.cos(a2) * Math.cos(pp) * (RX + 1), FH + Math.sin(pp) * 5, Math.sin(a2) * Math.cos(pp) * (RZ + 1)); } }
     const rg = new THREE.BufferGeometry(); rg.setAttribute('position', new THREE.Float32BufferAttribute(ribs, 3)); F.group.add(new THREE.LineSegments(rg, F.mats.lineDim));
     // facade sign
-    const sign = new THREE.Mesh(new THREE.PlaneGeometry(36, 4.5), new THREE.MeshBasicMaterial({ map: textTexture('PARQUE ARAUCO'), transparent: true, toneMapped: false, color: new THREE.Color(1.7, 1.7, 1.7), depthWrite: false }));
-    sign.position.set(0, SLAB + 3.1, MD / 2 + .25); F.group.add(sign); F.fadeMats.push(sign.material); sign.material.userData.alwaysT = true;
+    // official lockup: the mark on the left, the "ParqueArauco" wordmark on the right (real letter shapes)
+    const WH = 4.6, WW = WH * 350 / 72, MK = 5.8, GAP = 1.1, X0 = -(MK + GAP + WW) / 2;
+    const sign = new THREE.Mesh(new THREE.PlaneGeometry(WW, WH), new THREE.MeshBasicMaterial({ map: wordmarkTexture(), transparent: true, toneMapped: false, color: new THREE.Color(1.7, 1.7, 1.7), depthWrite: false }));
+    sign.position.set(X0 + MK + GAP + WW / 2, SLAB + 3.1, MD / 2 + .25); F.group.add(sign); F.fadeMats.push(sign.material); sign.material.userData.alwaysT = true;
+    // lit Parque Arauco mark beside the name: four pieces that snap together (see logoFrame)
+    const lg = new THREE.Group(); lg.position.set(X0 + MK / 2, SLAB + 3.1, MD / 2 + .3); F.group.add(lg);
+    F.logo = { group: lg, t0: -1, pieces: PA_PIECES.map((p, k) => {
+      const m = new THREE.MeshBasicMaterial({ map: markPieceTexture(k), transparent: true, depthWrite: false, toneMapped: false, color: new THREE.Color(2.1, 2.1, 2.1) });
+      m.userData.alwaysT = true; F.fadeMats.push(m);
+      const mesh = new THREE.Mesh(new THREE.PlaneGeometry(MK, MK), m); lg.add(mesh);
+      return { mesh, m, from: p.from };
+    }) };
   }
   // merge
   for (const [batch, parent] of [[F.b, F.group], [F.e, F.escGroup]]) {
@@ -1066,6 +1255,20 @@ const SUN_DIR = new THREE.Vector3(-0.86, 0.06, 0.5).normalize();
         gl_FragColor = vec4(c, 1.0); }`,
   }));
   scene.add(sky);
+  // Image-based light: bake this dusk sky, a warm sun card and soft city glow into an environment map,
+  // so glass, cars and polished floors reflect a real sky instead of flat colour.
+  {
+    const envScene = new THREE.Scene();
+    envScene.add(new THREE.Mesh(new THREE.SphereGeometry(50, 32, 16), sky.material.clone()));
+    const card = (c, k, pos, w, h) => { const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: new THREE.Color(c).multiplyScalar(k), side: THREE.DoubleSide })); m.position.copy(pos); m.lookAt(0, pos.y, 0); envScene.add(m); };
+    card(0xffb27a, 3.2, SUN_DIR.clone().multiplyScalar(40).setY(5), 22, 7);     // low warm sun
+    card(0xff9a66, .9, SUN_DIR.clone().multiplyScalar(40).setY(1.5), 70, 3);    // glowing horizon band
+    card(0x7d96ff, .5, new THREE.Vector3(26, 28, -26), 34, 20);                 // cool sky patch
+    card(0xffd29a, .35, new THREE.Vector3(0, 1, -40), 90, 3);                   // far city lights
+    card(0xffd29a, .35, new THREE.Vector3(40, 1, 0), 90, 3);
+    const pm = new THREE.PMREMGenerator(renderer);
+    scene.environment = pm.fromScene(envScene, 0.02).texture; pm.dispose();
+  }
   // stars
   const sp = []; for (let k = 0; k < 1600; k++) { const a = rng() * TAU, y = .12 + rng() * .88, r = Math.sqrt(1 - y * y); sp.push(Math.cos(a) * r * 3000, y * 3000, Math.sin(a) * r * 3000); }
   const sg = new THREE.BufferGeometry(); sg.setAttribute('position', new THREE.Float32BufferAttribute(sp, 3));
@@ -1092,9 +1295,24 @@ const SUN_DIR = new THREE.Vector3(-0.86, 0.06, 0.5).normalize();
   const ground = new THREE.Mesh(new THREE.PlaneGeometry(6000, 6000), new THREE.MeshStandardMaterial({ color: 0x0c1017, roughness: 1 }));
   ground.rotation.x = -Math.PI / 2; ground.position.y = -0.02; ground.receiveShadow = true; scene.add(ground); groundMats.push(ground.material);
   const plazaG = new THREE.ShapeGeometry(roundedRect(170, 112, 14)); plazaG.rotateX(-Math.PI / 2);
-  const plaza = new THREE.Mesh(plazaG, new THREE.MeshStandardMaterial({ color: 0x232830, roughness: .95 })); plaza.position.set(0, .01, 6); plaza.receiveShadow = true; scene.add(plaza); groundMats.push(plaza.material);
+  // polished stone paving: tiles with small tone changes; the grout is rougher than the stone
+  const pave = canvasTex(256, (g, n) => {
+    for (let y = 0; y < 4; y++) for (let x = 0; x < 4; x++) { const v = 150 + rng() * 40; g.fillStyle = `rgb(${v},${v},${v + 6})`; g.fillRect(x * 64, y * 64, 64, 64); }
+    noise(g, n, 14); g.fillStyle = 'rgba(40,40,46,.9)'; for (let k = 0; k <= 4; k++) { g.fillRect(k * 64 - 1.5, 0, 3, n); g.fillRect(0, k * 64 - 1.5, n, 3); }
+  }, 1 / 8);
+  const paveR = canvasTex(256, (g, n) => {
+    g.fillStyle = '#5a5a5a'; g.fillRect(0, 0, n, n); noise(g, n, 40); g.fillStyle = '#f0f0f0'; for (let k = 0; k <= 4; k++) { g.fillRect(k * 64 - 2, 0, 4, n); g.fillRect(0, k * 64 - 2, n, 4); }
+  }, 1 / 8, false);
+  const plaza = new THREE.Mesh(plazaG, new THREE.MeshStandardMaterial({ color: 0x3a404b, map: pave, roughness: .62, roughnessMap: paveR, metalness: .05, envMapIntensity: 1.3 })); plaza.position.set(0, .01, 6); plaza.receiveShadow = true; scene.add(plaza); groundMats.push(plaza.material);
+  // soft contact shadow (ambient occlusion) where the building meets the plaza
+  const ao = canvasTex(256, (g, n) => { g.fillStyle = '#000'; g.fillRect(0, 0, n, n); g.filter = 'blur(20px)'; g.fillStyle = '#fff'; g.fillRect(36, 56, n - 72, n - 112); }, 1, false, false);
+  const aoM = new THREE.MeshBasicMaterial({ color: 0x000000, alphaMap: ao, transparent: true, opacity: .62, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2 });
+  aoM.userData.base = .62; aoM.userData.alwaysT = true;
+  const aoP = new THREE.Mesh(new THREE.PlaneGeometry(MW * 1.42, MD * 1.75), aoM); aoP.rotation.x = -Math.PI / 2; aoP.position.set(0, .05, 0); aoP.renderOrder = 1; scene.add(aoP); groundMats.push(aoM);
   // green park in front of the mall (the parking is underground)
-  const park = new THREE.Mesh(new THREE.PlaneGeometry(150, 62), new THREE.MeshStandardMaterial({ color: 0x13241a, roughness: 1 })); park.rotation.x = -Math.PI / 2; park.position.set(0, .02, 96); park.receiveShadow = true; scene.add(park); groundMats.push(park.material);
+  const grass = canvasTex(256, (g, n) => { g.fillStyle = '#7c8c74'; g.fillRect(0, 0, n, n); for (let k = 0; k < 2600; k++) { const v = rng(); g.fillStyle = `rgba(${v < .5 ? '40,70,40' : '150,170,120'},${R(.08, .3)})`; g.fillRect(rng() * n, rng() * n, R(1, 3), R(2, 6)); } }, 1 / 10);
+  grass.repeat.set(15, 6.2);
+  const park = new THREE.Mesh(new THREE.PlaneGeometry(150, 62), new THREE.MeshStandardMaterial({ color: 0x1d3a26, map: grass, roughness: .95, envMapIntensity: .4 })); park.rotation.x = -Math.PI / 2; park.position.set(0, .02, 96); park.receiveShadow = true; scene.add(park); groundMats.push(park.material);
   const pathMat = new THREE.MeshStandardMaterial({ color: 0x2c3036, roughness: .9 }); groundMats.push(pathMat);
   for (const [w, d, x, z] of [[150, 3, 0, 98], [3, 62, 0, 96], [3, 62, -30, 96], [3, 62, 30, 96]]) { const p = new THREE.Mesh(new THREE.PlaneGeometry(w, d), pathMat); p.rotation.x = -Math.PI / 2; p.position.set(x, .03, z); p.receiveShadow = true; scene.add(p); }
   const m4 = new THREE.Matrix4(); // parked cars are built later, in the parking block
@@ -1219,12 +1437,12 @@ function buildParkLevel(n) {
   }
   for (const s of lv.spaces) s.s = s.occ;
   const N = lv.spaces.length;
-  const carMat = new THREE.MeshStandardMaterial({ roughness: .35, metalness: .6 });
+  const carMat = new THREE.MeshPhysicalMaterial({ roughness: .42, metalness: .55, clearcoat: 1, clearcoatRoughness: .08, envMapIntensity: 1.4 });
   const padMat = new THREE.MeshBasicMaterial({ transparent: true, opacity: .34, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false });
   const lightMat = new THREE.MeshBasicMaterial({ toneMapped: false });
   padMat.userData.base = .34; padMat.userData.alwaysT = true;
   lv.fadeMats.push(carMat, padMat, lightMat);
-  lv.cars = new THREE.InstancedMesh(carGeo, carMat, N); lv.cars.castShadow = true;
+  lv.cars = new THREE.InstancedMesh(carGeo, carMat, N); // underground: no sun, so no sun shadow
   lv.pads = new THREE.InstancedMesh(new THREE.PlaneGeometry(2.3, 4.7).rotateX(-Math.PI / 2), padMat, N);
   lv.lights = new THREE.InstancedMesh(puckGeo, lightMat, N);
   lv.spick = new THREE.InstancedMesh(new THREE.BoxGeometry(2.4, 1.8, 5), pickMat, N);
@@ -1311,7 +1529,7 @@ function parkingFrame(dt) {
     if (dirty) lv.cars.instanceMatrix.needsUpdate = true;
   }
   const g = damp(groundFade.v, state.parking ? .1 : 1, 3, dt); groundFade.v = g;
-  for (const m of groundMats) { const tr_ = g < .99; if (m.transparent !== tr_) { m.transparent = tr_; m.needsUpdate = true; } m.opacity = g; m.depthWrite = g > .5; }
+  for (const m of groundMats) { const tr_ = g < .99 || !!m.userData.alwaysT; if (m.transparent !== tr_) { m.transparent = tr_; m.needsUpdate = true; } m.opacity = (m.userData.base ?? 1) * g; m.depthWrite = g > .5 && !m.userData.alwaysT; }
 }
 function pkStats(n) {
   const list = n ? PK.levels[n - 1].spaces : PK.levels.flatMap(l => l.spaces);
@@ -1356,7 +1574,7 @@ for (const F of floors) {
   if (F.i > 0) for (let k = 0; k < 5; k++) L.push({ mode: 'bridge', x: R(-1.8, 1.8), z: R(-10, 10), dir: rng() < .5 ? -1 : 1, ph: R(0, TAU) });
   if (F.i < 3) for (let k = 0; k < 10; k++) L.push({ mode: 'esc', s: rng(), e: k % 2, lane: R(-.3, .3), ph: R(0, TAU) });
   const mat = new THREE.MeshStandardMaterial({ roughness: .8 }); F.fadeMats.push(mat);
-  F.pmesh = new THREE.InstancedMesh(capG, mat, L.length); F.pmesh.frustumCulled = false; F.pmesh.castShadow = true;
+  F.pmesh = new THREE.InstancedMesh(capG, mat, L.length); F.pmesh.frustumCulled = false; // people are tiny; their shadows are not worth redrawing the shadow map every frame
   L.forEach((p, k) => F.pmesh.setColorAt(k, new THREE.Color(pick(CLOTHES))));
   F.group.add(F.pmesh);
   F.pax = L.length * 13;
@@ -1572,7 +1790,7 @@ function sensorCam(s) {
 }
 function parkingCam(n) { const k = fitK(), t = new THREE.Vector3(-2, -n * PH + .4, 0); return [t.clone().add(new THREE.Vector3(62, 62, 82).multiplyScalar(k)), t]; }
 function goParking(n = 1) { state.parking = n; state.floor = null; state.section = null; state.sensor = null; setExplode(false); const [p, t] = parkingCam(n); flyTo(p, t, 2.6); refreshNav(); }
-function goOverview() { state.parking = false; state.floor = null; state.section = null; state.sensor = null; const [p, t] = overviewCam(); flyTo(p, t, 2.6); refreshNav(); }
+function goOverview() { state.parking = false; state.floor = null; state.section = null; state.sensor = null; const [p, t] = overviewCam(); flyTo(p, t, 2.6); refreshNav(); if (floors[3].logo && !state.intro) floors[3].logo.t0 = clockT + 1.3; }
 function goFloor(f) { state.parking = false; state.floor = f; state.section = null; state.sensor = null; const [p, t] = floorCam(f); flyTo(p, t, 2.4); refreshNav(); }
 function goSection(sec) { state.parking = false; state.floor = sec.floor; state.section = sec; state.sensor = null; const [p, t] = sectionCam(sec); flyTo(p, t, 2.3); refreshNav(); }
 function goSensor(s) { state.parking = false; state.floor = s.floor; state.section = s.sec || null; state.sensor = s; const [p, t] = sensorCam(s); flyTo(p, t, 2.0); refreshNav(); }
@@ -1860,6 +2078,79 @@ function updateHover() {
 }
 
 /* ============================================================
+   Opening shot: the camera starts above a cloud deck, dives through it
+   and comes out over the mall. Clouds are soft sprites, lit warm on the sun side.
+   ============================================================ */
+const INTRO_FROM = new THREE.Vector3(-170, 345, 410), INTRO_LOOK = new THREE.Vector3(0, 14, 0), INTRO_DUR = 8.4;
+const sstep = (a, b, x) => { const t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
+const clouds = { group: new THREE.Group(), list: [], k: 1 };
+scene.add(clouds.group);
+{
+  const tex = [0, 1, 2].map(() => canvasTex(256, (g, n) => {
+    for (let k = 0; k < 28; k++) {
+      const a = rng() * TAU, r = Math.pow(rng(), .7) * n * .24, x = n / 2 + Math.cos(a) * r * 1.3, y = n / 2 + Math.sin(a) * r * .55 + 8, s = R(.14, .27) * n * (1.1 - r / (n * .3));
+      const gr = g.createRadialGradient(x, y, 0, x, y, s); gr.addColorStop(0, 'rgba(255,255,255,.5)'); gr.addColorStop(.55, 'rgba(255,255,255,.2)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
+      g.fillStyle = gr; g.fillRect(0, 0, n, n);
+    }
+  }, 1, true, false));
+  const warm = new THREE.Color(0xffb08a), cool = new THREE.Color(0x7586ad), sunH = new THREE.Vector2(SUN_DIR.x, SUN_DIR.z).normalize();
+  const add = (x, y, z, s, base) => {
+    const t = clamp(new THREE.Vector2(x, z).normalize().dot(sunH) * .5 + .5, 0, 1);
+    const m = new THREE.SpriteMaterial({ map: tex[(rng() * 3) | 0], color: cool.clone().lerp(warm, t * t * .6), transparent: true, depthWrite: false, opacity: 0, fog: true });
+    m.rotation = R(-.25, .25);
+    const sp = new THREE.Sprite(m); sp.position.set(x, y, z); sp.scale.set(s, s * .55, 1); clouds.group.add(sp);
+    clouds.list.push({ sp, m, base, vx: R(1.5, 4), x0: x });
+  };
+  // the deck seen from above at the start
+  for (let k = 0; k < (Q.tier ? 64 : 30); k++) { const a = rng() * TAU, r = 60 + Math.sqrt(rng()) * 470; add(Math.cos(a) * r - 40, R(170, 220), Math.sin(a) * r + 120, R(95, 175), R(.5, .85)); }
+  // thicker cloud right on the camera path, so the dive goes through it
+  const [endP] = overviewCam();
+  for (let k = 0; k < (Q.tier ? 26 : 14); k++) {
+    const t = R(0, 1), y = R(162, 228), f = clamp((INTRO_FROM.y - y) / (INTRO_FROM.y - endP.y), 0, 1);
+    const p = INTRO_FROM.clone().lerp(endP, f); add(p.x + R(-70, 70), y, p.z + R(-70, 70), R(70, 130), R(.6, .95) * (t > .5 ? 1 : .8));
+  }
+  if (REDUCED) clouds.group.visible = false;
+}
+function cloudsFrame(dt) {
+  if (!clouds.group.visible) return;
+  clouds.k = damp(clouds.k, state.intro ? 1 : 0, state.intro ? 2 : 1.4, dt);
+  const below = sstep(165, 120, camera.position.y), K = clouds.k * (1 - below * .8) * sstep(0, 1.4, clockT - introStart);
+  for (const c of clouds.list) {
+    c.sp.position.x += c.vx * dt;
+    const d = c.sp.position.distanceTo(camera.position), near = sstep(c.sp.scale.x * .12, c.sp.scale.x * .65, d);
+    c.m.opacity = c.base * K * near;
+  }
+  if (!state.intro && clouds.k < .01) clouds.group.visible = false;
+}
+// soft clouds over the screen in the first seconds (they open outward and fade)
+{
+  const veil = $('#veil');
+  if (REDUCED) veil.remove();
+  else {
+    let h = '';
+    for (let k = 0; k < 11; k++) {
+      const x = R(-20, 100), y = R(-20, 100), s = R(55, 95), ang = Math.atan2(y - 50, x - 50);
+      h += `<i style="left:${x - s / 2}vw;top:${y - s / 2}vh;width:${s}vmax;height:${s * .62}vmax;--vx:${Math.cos(ang) * 60}vw;--vy:${Math.sin(ang) * 60}vh;animation-delay:${R(0, .5).toFixed(2)}s"></i>`;
+    }
+    veil.innerHTML = h; setTimeout(() => veil.remove(), 5200);
+  }
+}
+/* The lit mark on the facade snaps together like the logo in the assistant intro video. */
+// Same timing and spring as the page logo: piece i starts at frame 4 + 4i, offsets in mark units (182 = mark size).
+function logoFrame() {
+  const F = floors[3], lg = F && F.logo; if (!lg) return;
+  if (lg.t0 < 0 && (!state.intro || clockT - introStart > 5.2)) lg.t0 = clockT;
+  const t = lg.t0 < 0 ? -1 : clockT - lg.t0, A = lg.pieces[0].mesh.geometry.parameters.width / 182;
+  lg.pieces.forEach((p, i) => {
+    const k = REDUCED ? 1 : t < 0 ? 0 : sprAt(t - (4 + i * 4) / 30), [dx, dy, r] = p.from, u = 1 - k;
+    p.mesh.position.set(dx * u * A, -dy * u * A, u * .6);
+    p.mesh.rotation.z = -r * u * Math.PI / 180;
+    p.mesh.scale.setScalar(.35 + .65 * k);
+    p.m.opacity = clamp(k * 1.6, 0, 1) * F.cur.op; // keeps the floor fade
+  });
+}
+
+/* ============================================================
    Cinematic tour + intro
    ============================================================ */
 const cap = $('#cap');
@@ -1879,16 +2170,32 @@ let tourI = 0, tourT = 0;
 function startTour() { state.tour = true; tourI = 0; tourT = 0; document.body.classList.add('cine'); $('#tourTxt').textContent = tr('stop'); document.querySelector('[data-toggle="tour"]').setAttribute('aria-pressed', true); runShot(); }
 function runShot() { const s = TOUR[tourI]; s.run(); caption(s.cap()); tourT = 0; }
 function stopTour() { state.tour = false; document.body.classList.remove('cine'); cap.classList.remove('on'); $('#tourTxt').textContent = tr('tour'); document.querySelector('[data-toggle="tour"]').setAttribute('aria-pressed', false); controls.autoRotateSpeed = .35; }
-function introTitle() { const h = $('#introTitle'); h.innerHTML = [...'PARQUE ARAUCO'].map((c, k) => `<span style="animation-delay:${.25 + k * .07}s">${c === ' ' ? '&nbsp;' : c}</span>`).join(''); }
+/** Intro logo, timed like the video: pieces from frame 4, "Parque" rises at frame 30, "Arauco" 6 frames later. */
+function introTitle() { playMark($('#intro .pamark')); playWord($('#intro .pawm'), (30 - 4) / 30); const pw = $('#intro .pow'); pw.classList.remove('on'); setTimeout(() => pw.classList.add('on'), 1900); }
 function endIntro() {
   if (!state.intro) return; state.intro = false;
   $('#intro').classList.add('gone'); $('#skip').style.opacity = 0; setTimeout(() => $('#skip').remove(), 700);
   document.body.classList.remove('pre'); document.body.classList.remove('cine');
   for (const F of floors) F.introDone = true;
+  setTimeout(() => playMark(document.querySelector('#brand .mk svg')), 450);
+  const veil = $('#veil'); if (veil) veil.classList.add('gone');
   if (!state.tour) { const [p, t] = overviewCam(); if (!camTween || camTween.p1.distanceTo(p) < 1) flyTo(p, t, camTween ? Math.max(1.2, camTween.dur - (clockT - camTween.start)) : 1.4, .04); }
   refreshNav();
 }
 $('#skip').addEventListener('click', e => { e.stopPropagation(); endIntro(); });
+/** Debug: play the opening shot again (window.__demo.replayIntro()). */
+function replayIntro() {
+  if (state.tour) stopTour();
+  Object.assign(state, { intro: true, floor: null, parking: false, section: null, sensor: null }); setExplode(false); introStart = clockT;
+  for (const F of floors) { F.introDone = false; F.cur.y = 70 + F.i * 14; F.cur.op = 0; }
+  if (floors[3].logo) floors[3].logo.t0 = -1;
+  for (const c of clouds.list) c.sp.position.x = c.x0;
+  clouds.k = 1; clouds.group.visible = !REDUCED;
+  $('#intro').classList.remove('gone'); introTitle();
+  document.body.classList.add('cine');
+  camera.position.copy(INTRO_FROM); controls.target.copy(INTRO_LOOK); camera.lookAt(INTRO_LOOK);
+  const [p, t] = overviewCam(); flyTo(p, t, REDUCED ? .01 : INTRO_DUR, 0); refreshNav();
+}
 
 /* ============================================================
    Main loop
@@ -1907,22 +2214,57 @@ function setFloorOpacity(F, o) {
 let loggedErr = false;
 function frame() {
   requestAnimationFrame(frame);
-  const tn = performance.now(), dt = Math.min(.05, (tn - lastT) / 1000); lastT = tn; clockT += dt;
+  const tn = performance.now();
+  // On 120/144 Hz screens draw at most ~60-72 frames per second: same look, half the GPU work.
+  if (tn - lastT < 1000 / 75) return;
+  const ms = tn - lastT, dt = Math.min(.05, ms / 1000); lastT = tn; clockT += dt;
   // One failing part must never freeze the camera or the picture.
   try { step(dt); } catch (e) { if (!loggedErr) { loggedErr = true; console.error(e); } }
   try { updateHover(); } catch (e) { }
+  shadowCheck();
   composer.render();
   labelRenderer.render(scene, camera);
+  quality(ms);
+}
+/* Redraw the sun's shadow map only when a shadow caster moved (floors sliding, explode, parking view). */
+let shadowSig = NaN;
+function shadowCheck() {
+  let s = 0;
+  for (const F of floors) s += F.group.position.y * (F.i + 1.7) + (F.group.visible ? 1 : 0) + (F.escGroup.visible ? .37 : 0);
+  for (const lv of PK.levels) s += lv.group.position.y * .13 + (lv.group.visible ? 3 : 0);
+  if (!(Math.abs(s - shadowSig) < 1e-4)) { shadowSig = s; renderer.shadowMap.needsUpdate = true; }
+}
+/* Adaptive quality: keep the frame rate smooth by lowering the render resolution a little at a time,
+   and on very slow devices switch off the most expensive extras (MSAA, glass blur behind panels). */
+function applyPR() { PR = Math.max(.5, basePR() * Q.scale); renderer.setPixelRatio(PR); composer.setPixelRatio(PR); composer.setSize(innerWidth, innerHeight); }
+function setTier(t) {
+  Q.tier = t; Q.scale = 1; applyPR();
+  document.documentElement.classList.toggle('lite', t < 2);
+  for (const r of [composer.renderTarget1, composer.renderTarget2]) { r.samples = MSAA[t]; r.dispose(); }
+}
+function quality(ms) {
+  if (ms > 250) return; // tab was in the background or a one-off hitch
+  Q.ft += (ms - Q.ft) * .06;
+  if (clockT < 2.5 || clockT < Q.cool) return; // shaders compile in the first seconds; wait after each change
+  const fps = 1000 / Q.ft, s = ms / 1000;
+  if (fps < 42) { Q.slow += s; Q.fast = 0; } else if (fps > 55) { Q.fast += s; Q.slow = 0; } else Q.slow = Q.fast = 0;
+  if (Q.slow > 1.2) {
+    Q.slow = 0; Q.cool = clockT + 1.6; Q.lastDrop = clockT;
+    if (Q.scale > .6) { Q.scale = +(Q.scale - .1).toFixed(2); applyPR(); } else if (Q.tier > 0) setTier(Q.tier - 1);
+  } else if (Q.fast > 6 && Q.scale < 1) { Q.fast = 0; Q.cool = clockT + 2; Q.scale = Math.min(1, +(Q.scale + .05).toFixed(2)); applyPR(); }
+  // smooth for a long time at full scale: give back the extras we switched off (never above what the device started with)
+  else if (Q.fast > 10 && Q.tier < Q.maxTier && clockT - (Q.lastDrop || 0) > 20) { Q.fast = 0; Q.cool = clockT + 3; setTier(Q.tier + 1); Q.scale = .8; applyPR(); }
 }
 function step(dt) {
   // intro choreography
   if (state.intro) {
     const it = clockT - introStart;
-    if (it > 7.2) endIntro();
+    if (it > INTRO_DUR - 2.6) $('#intro').classList.add('gone');
+    if (it > INTRO_DUR - .2) endIntro();
   }
   // floors follow targets
   for (const F of floors) {
-    const delay = 0.5 + F.i * .45, ready = !state.intro || (clockT - introStart) > delay || F.introDone;
+    const delay = 2.9 + F.i * .4, ready = !state.intro || (clockT - introStart) > delay || F.introDone;
     const ty = ready ? floorTargetY(F.i) : 70 + F.i * 14, to = ready ? floorTargetOp(F.i) : 0;
     F.cur.y = damp(F.cur.y, ty, state.intro ? 2.2 : 3.2, dt); F.cur.op = damp(F.cur.op, to, 3, dt);
     F.group.position.y = F.cur.y; setFloorOpacity(F, F.cur.op);
@@ -1936,6 +2278,8 @@ function step(dt) {
   // camera
   applyViewOffset(dt);
   parkingFrame(dt);
+  cloudsFrame(dt);
+  logoFrame();
   if (camTween) {
     const k = clamp((clockT - camTween.start) / camTween.dur, 0, 1), e = ease(k);
     camera.position.lerpVectors(camTween.p0, camTween.p1, e); camera.position.y += Math.sin(Math.PI * e) * camTween.p0.distanceTo(camTween.p1) * camTween.arc;
@@ -2025,21 +2369,21 @@ function step(dt) {
 
 addEventListener('resize', () => {
   camera.aspect = innerWidth / innerHeight; applyViewOffset();
-  renderer.setSize(innerWidth, innerHeight); composer.setSize(innerWidth, innerHeight); labelRenderer.setSize(innerWidth, innerHeight);
+  renderer.setSize(innerWidth, innerHeight); applyPR(); labelRenderer.setSize(innerWidth, innerHeight);
 });
 
 /* go */
-introTitle();
 applyLang();
 tick(true);
 for (const s of sensors) evalSensor(s);
 tick(true);
 $('#loading').classList.add('gone');
+setTimeout(() => { if (state.intro) introTitle(); }, 380); // start the logo once the loading screen has faded
 document.body.classList.add('cine');
 introStart = 0; clockT = 0;
-{ const [p, t] = overviewCam(); camera.position.set(-250, 40, 320); controls.target.set(0, 14, 0); camera.lookAt(controls.target); flyTo(p, t, REDUCED ? .01 : 7.4, .05); }
+{ const [p, t] = overviewCam(); camera.position.copy(INTRO_FROM); controls.target.copy(INTRO_LOOK); camera.lookAt(controls.target); flyTo(p, t, REDUCED ? .01 : INTRO_DUR, 0); }
 refreshNav();
-window.__demo = { camera, controls, state, floors, sections, sensors, goFloor, goSection, goOverview, startTour, stopTour, toggle, endIntro, setLang };
+window.__demo = { camera, controls, state, floors, sections, sensors, goFloor, goSection, goOverview, startTour, stopTour, toggle, endIntro, setLang, replayIntro, renderer, composer, bloom, sun, scene, Q, GPU_NAME };
 requestAnimationFrame(frame);
 </script>
 </body>
