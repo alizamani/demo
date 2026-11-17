@@ -46,6 +46,11 @@ body.cine .lb{height:10vh}
 #loading{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;color:var(--dim);font-family:var(--mono);font-size:12px;letter-spacing:.2em;background:var(--bg);transition:opacity .6s}
 #loading.gone{opacity:0;pointer-events:none}
 #skip{position:fixed;right:24px;bottom:calc(10vh + 16px);z-index:41;background:rgba(255,255,255,.06);border:1px solid var(--line2);border-radius:999px;padding:7px 14px;font-size:12px;color:var(--dim);cursor:pointer;transition:opacity .6s}
+#sndpill{position:fixed;left:24px;bottom:calc(10vh + 16px);z-index:41;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.09);border:1px solid var(--line2);border-radius:999px;padding:7px 15px 7px 11px;font-size:12px;color:#e8f0ff;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .6s,transform .6s}
+#sndpill.on{opacity:1;pointer-events:auto;transform:none;animation:sndPulse 2.4s ease-in-out infinite}
+#sndpill svg{width:16px;height:16px;flex:none}
+@keyframes sndPulse{0%,100%{box-shadow:0 0 0 0 rgba(130,220,255,0)}50%{box-shadow:0 0 0 7px rgba(130,220,255,.13)}}
+.tb.snd[aria-pressed="false"] .s-on,.tb.snd[aria-pressed="true"] .s-off{display:none}
 #skip:hover{color:var(--text)}
 
 /* ui shell */
@@ -297,6 +302,7 @@ addEventListener('unhandledrejection', e => { window.__errs.push(String(e.reason
   <div class="pow"><span data-i18n="poweredBy">Desarrollado por</span><span class="bqlogo" role="img" aria-label="BeQuarks"></span></div>
 </div>
 <button id="skip" data-i18n="skip">Saltar intro ›</button>
+<button id="sndpill" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5v14l-4.5-4.5H4z" fill="currentColor" stroke="none"/><path d="M15.5 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg><span data-i18n="soundOn">Activar sonido</span></button>
 
 <div id="brand" class="ui left hide-cine">
   <div class="mk" title="Parque Arauco"></div>
@@ -337,6 +343,7 @@ addEventListener('unhandledrejection', e => { window.__errs.push(String(e.reason
   <button class="tb" data-toggle="heat" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3c3 4 5 6.5 5 10a5 5 0 0 1-10 0c0-2 1-3.5 2-5 .5 2 1.5 3 3 3-1-3 0-5.5 0-8z"/></svg><span data-i18n="heat">Mapa de calor</span> <kbd>H</kbd></button>
   <button class="tb" data-toggle="people" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="7" r="3"/><path d="M3 21v-1a6 6 0 0 1 12 0v1M16 4a3 3 0 0 1 0 6M21 21v-1a6 6 0 0 0-4-5.6"/></svg><span data-i18n="people">Personas</span> <kbd>P</kbd></button>
   <button class="tb" data-toggle="labels" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.4"/></svg><span data-i18n="labels">Etiquetas</span> <kbd>L</kbd></button>
+  <button class="tb snd" data-toggle="sound" aria-pressed="true"><svg class="s-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5v14l-4.5-4.5H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg><svg class="s-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5v14l-4.5-4.5H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></svg><span data-i18n="sound">Sonido</span> <kbd>M</kbd></button>
 </div>
 
 <div id="toasts"></div>
@@ -376,7 +383,7 @@ const mix = (a, b, t) => new THREE.Color(a).lerp(new THREE.Color(b), t);
 const LANGS = ['es', 'en'];
 const T = {
   es: {
-    loading: 'CARGANDO MODELO…', introSub: 'Gemelo digital · Sensores en tiempo real', poweredBy: 'Desarrollado por', skip: 'Saltar intro ›',
+    loading: 'CARGANDO MODELO…', introSub: 'Gemelo digital · Sensores en tiempo real', poweredBy: 'Desarrollado por', skip: 'Saltar intro ›', sound: 'Sonido', soundOn: 'Activar sonido',
     brandSub: 'Gemelo digital · Operaciones y aseo', demo: 'DEMO · DATOS SIMULADOS', live: 'EN VIVO',
     lgOk: 'Libre / OK', lgBusy: 'Ocupado', lgWarn: 'Advertencia', lgAlert: 'Alerta', lgCounter: 'Cuenta personas', lgBeacon: 'Beacon de aseo', lgStaff: 'Auxiliar de aseo', lgVisitors: 'Visitantes',
     tour: 'Recorrido', stop: 'Detener', explode: 'Explotar', heat: 'Mapa de calor', people: 'Personas', labels: 'Etiquetas',
@@ -429,7 +436,7 @@ const T = {
     tc7: a => `Auxiliares con tracker: <b>cada alerta se asigna y se cierra sola</b> · adherencia ${a} %`,
   },
   en: {
-    loading: 'LOADING MODEL…', introSub: 'Digital twin · Real-time sensors', poweredBy: 'Powered by', skip: 'Skip intro ›',
+    loading: 'LOADING MODEL…', introSub: 'Digital twin · Real-time sensors', poweredBy: 'Powered by', skip: 'Skip intro ›', sound: 'Sound', soundOn: 'Turn sound on',
     brandSub: 'Digital twin · Operations & cleaning', demo: 'DEMO · SIMULATED DATA', live: 'LIVE',
     lgOk: 'Free / OK', lgBusy: 'Occupied', lgWarn: 'Warning', lgAlert: 'Alert', lgCounter: 'People counter', lgBeacon: 'Cleaning beacon', lgStaff: 'Cleaning staff', lgVisitors: 'Visitors',
     tour: 'Tour', stop: 'Stop', explode: 'Explode', heat: 'Heat map', people: 'People', labels: 'Labels',
@@ -2009,6 +2016,7 @@ document.addEventListener('click', e => {
   const t = e.target.closest('[data-toggle]'); if (t) toggle(t.dataset.toggle);
 });
 function toggle(k) {
+  if (k === 'sound') { MUSIC.toggle(); return; }
   if (k === 'tour') { if (state.intro) endIntro(); state.tour ? stopTour() : startTour(); return; }
   userNav(() => {
     if (k === 'explode') { setExplode(!state.explode); if (state.floor === null) { const [p, t] = overviewCam(); flyTo(p, t, 2.2); } else if (!state.section) { const [p, t] = floorCam(state.floor); flyTo(p, t, 1.8); } }
@@ -2026,7 +2034,7 @@ addEventListener('keydown', e => {
   else if (k === '5') userNav(() => goParking(1));
   else if (k === '6') userNav(() => goParking(2));
   else if (k === 'escape') userNav(back);
-  else if (k === 'e') toggle('explode'); else if (k === 'h') toggle('heat'); else if (k === 'p') toggle('people'); else if (k === 'l') toggle('labels'); else if (k === 't') toggle('tour');
+  else if (k === 'e') toggle('explode'); else if (k === 'h') toggle('heat'); else if (k === 'p') toggle('people'); else if (k === 'l') toggle('labels'); else if (k === 't') toggle('tour'); else if (k === 'm') toggle('sound');
 });
 
 /* picking */
@@ -2170,6 +2178,150 @@ let tourI = 0, tourT = 0;
 function startTour() { state.tour = true; tourI = 0; tourT = 0; document.body.classList.add('cine'); $('#tourTxt').textContent = tr('stop'); document.querySelector('[data-toggle="tour"]').setAttribute('aria-pressed', true); runShot(); }
 function runShot() { const s = TOUR[tourI]; s.run(); caption(s.cap()); tourT = 0; }
 function stopTour() { state.tour = false; document.body.classList.remove('cine'); cap.classList.remove('on'); $('#tourTxt').textContent = tr('tour'); document.querySelector('[data-toggle="tour"]').setAttribute('aria-pressed', false); controls.autoRotateSpeed = .35; }
+/* ============================================================
+   Intro music: a short cinematic score made live with Web Audio (no file to download).
+   Dm – Bb – F – C, then D major with a big hit when the mall arrives (intro time 8.2 s).
+   Four glass chimes land with the four logo pieces. Times below are seconds since introStart.
+   ============================================================ */
+const MUSIC = (() => {
+  const AC = window.AudioContext || window.webkitAudioContext;
+  let ctx = null, out = null, verb = null, noiseBuf = null, cur = null, endAt = -9, sting = false, on = !!AC;
+  try { if (localStorage.getItem('pa-sound') === '0') on = false; } catch (e) {}
+  const hz = m => 440 * 2 ** ((m - 69) / 12), off = () => clockT - introStart;
+  function init() {
+    if (ctx || !AC) return;
+    ctx = new AC();
+    const comp = ctx.createDynamicsCompressor(); comp.threshold.value = -16; comp.knee.value = 8; comp.ratio.value = 4; comp.attack.value = .004; comp.release.value = .3;
+    out = ctx.createGain(); out.gain.value = 1; out.connect(comp); comp.connect(ctx.destination);
+    const sr = ctx.sampleRate, n = sr * 3.6 | 0, ir = ctx.createBuffer(2, n, sr);           // reverb: a 3.6 s hall tail
+    for (let c = 0; c < 2; c++) { const d = ir.getChannelData(c); for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / n) ** 2.8; }
+    verb = ctx.createConvolver(); verb.buffer = ir; verb.connect(out);
+    noiseBuf = ctx.createBuffer(1, sr * 2, sr); const nd = noiseBuf.getChannelData(0); for (let i = 0; i < nd.length; i++) nd[i] = Math.random() * 2 - 1;
+    ctx.onstatechange = () => { if (ctx.state === 'running') sync(); pill(); };
+  }
+  /* --- voices: each takes ctx time t; B is the bus of one playback (dry + reverb send) --- */
+  function route(node, B, wet, pan = 0) {
+    const p = ctx.createStereoPanner ? ctx.createStereoPanner() : ctx.createGain(); if (p.pan) p.pan.value = pan;
+    node.connect(p); p.connect(B.dry); if (wet) { const s = ctx.createGain(); s.gain.value = wet; p.connect(s); s.connect(B.wet); }
+  }
+  function osc(type, f, t, end) { const o = ctx.createOscillator(); o.type = type; o.frequency.value = f; o.start(t); o.stop(end); return o; }
+  function noise(t, end) { const s = ctx.createBufferSource(); s.buffer = noiseBuf; s.loop = true; s.start(t, Math.random() * 1.5); s.stop(end); return s; }
+  function pad(B, notes, t, d, vol, c0, c1) {                       // warm string pad: two detuned saws per note, opening filter
+    const lp = ctx.createBiquadFilter(), g = ctx.createGain(), a = Math.min(1, d * .45), end = t + d + 1.8;
+    lp.type = 'lowpass'; lp.Q.value = .8; lp.frequency.setValueAtTime(c0, t); lp.frequency.exponentialRampToValueAtTime(c1, t + d);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + a); g.gain.setValueAtTime(vol, t + d); g.gain.exponentialRampToValueAtTime(.0001, end);
+    notes.forEach((m, i) => { for (const dt of [-9, 8]) { const o = osc('sawtooth', hz(m), t, end); o.detune.value = dt + (i % 2 ? 3 : -3); const k = ctx.createGain(); k.gain.value = 1 / notes.length; o.connect(k); k.connect(lp); } });
+    lp.connect(g); route(g, B, .55);
+  }
+  function chime(B, m, t, v, pan) {                                 // glass bell: a few inharmonic partials
+    [[1, 1, 2.6], [2.01, .32, 1.4], [3.02, .16, .9], [4.23, .07, .5]].forEach(([r, a, dec]) => {
+      const g = ctx.createGain(); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(v * a, t + .004); g.gain.exponentialRampToValueAtTime(.0001, t + dec);
+      osc('sine', hz(m) * r, t, t + dec + .05).connect(g); route(g, B, .8, pan);
+    });
+  }
+  function pluck(B, m, t, v, pan) {                                 // arpeggio note
+    const g = ctx.createGain(), lp = ctx.createBiquadFilter(), f = hz(m), sq = ctx.createGain(); sq.gain.value = .22;
+    lp.type = 'lowpass'; lp.frequency.setValueAtTime(f * 7, t); lp.frequency.exponentialRampToValueAtTime(f * 1.4, t + .28);
+    osc('triangle', f, t, t + .4).connect(lp); osc('square', f * 1.003, t, t + .4).connect(sq); sq.connect(lp);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(v, t + .004); g.gain.exponentialRampToValueAtTime(.0001, t + .36);
+    lp.connect(g); route(g, B, .5, pan);
+  }
+  function bass(B, m, t, v) {                                       // short pulsing bass
+    const g = ctx.createGain(), lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 260;
+    osc('sawtooth', hz(m), t, t + .3).connect(lp); osc('sine', hz(m - 12), t, t + .3).connect(g);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(v, t + .01); g.gain.exponentialRampToValueAtTime(.0001, t + .24);
+    lp.connect(g); route(g, B, .1);
+  }
+  function boom(B, t, v, f0, f1, dec) {                             // deep cinematic impact (pitch drop + thump)
+    const g = ctx.createGain(), o = osc('sine', f0, t, t + dec + .1); o.frequency.setValueAtTime(f0, t); o.frequency.exponentialRampToValueAtTime(f1, t + dec * .7);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(v, t + .01); g.gain.exponentialRampToValueAtTime(.0001, t + dec); o.connect(g); route(g, B, .3);
+    const ng = ctx.createGain(), lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 700;
+    noise(t, t + .3).connect(lp); lp.connect(ng); ng.gain.setValueAtTime(v * .5, t); ng.gain.exponentialRampToValueAtTime(.0001, t + .22); route(ng, B, .4);
+  }
+  function sweep(B, t, d, f0, f1, v, q, wet, cut = false) {         // filtered noise: air, wind, riser
+    const g = ctx.createGain(), bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.Q.value = q;
+    bp.frequency.setValueAtTime(f0, t); bp.frequency.exponentialRampToValueAtTime(f1, t + d);
+    g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(v, t + d * (cut ? .97 : .45));
+    if (cut) g.gain.linearRampToValueAtTime(0, t + d + .03); else g.gain.exponentialRampToValueAtTime(.0001, t + d);
+    noise(t, t + d + .1).connect(bp); bp.connect(g); route(g, B, wet);
+  }
+  function crash(B, t, v) {
+    const g = ctx.createGain(), hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 2600;
+    g.gain.setValueAtTime(v, t); g.gain.exponentialRampToValueAtTime(.0001, t + 3); noise(t, t + 3.1).connect(hp); hp.connect(g); route(g, B, .7);
+  }
+  /* --- the score: [time, length, play(t, length)] --- */
+  function score(B) {
+    const S = [], L0 = .38, at = (a, d, fn) => S.push([a, d, fn]);
+    const chord = (a, d, ns, v, c0, c1) => at(a, d, (t, dd) => pad(B, ns, t, dd, v, c0, c1));
+    at(0, 7, (t, d) => sweep(B, t, d, 500, 1400, .05, .6, .4));                       // wind through the clouds
+    chord(0, 2.4, [50, 57, 62, 64, 65], .13, 260, 1300);                               // Dm(add9)
+    [81, 86, 89, 93].forEach((m, i) => at(L0 + (4 + 4 * i) / 30 + .19, 0, t => chime(B, m, t, .1, -.45 + .3 * i)));   // logo pieces
+    at(L0 + .95, 0, t => boom(B, t, .45, 70, 34, 1.8));                                // the wordmark rises
+    chord(2.4, 2, [46, 53, 58, 62, 65], .14, 800, 1900);                               // Bb
+    chord(4.4, 2, [45, 53, 57, 60, 65], .15, 1300, 2700);                              // F/A
+    chord(6.4, .9, [48, 55, 60, 65, 67], .16, 2000, 3200);                             // Csus4
+    chord(7.3, .9, [48, 55, 60, 64, 67], .17, 2600, 3800);                             // C
+    const arps = [[2.4, [58, 62, 65, 70, 74]], [4.4, [57, 60, 65, 69, 72]], [6.4, [55, 60, 65, 67, 72]], [7.3, [55, 60, 64, 67, 72]]], pat = [0, 1, 2, 3, 4, 3, 2, 1];
+    for (let i = 0, a = 2.4; a < 8.15; i++, a += .125) {
+      const ns = arps.filter(x => x[0] <= a + 1e-6).pop()[1], v = .03 + .045 * (a - 2.4) / 5.8;
+      at(a, 0, t => pluck(B, ns[pat[i % 8]], t, v, Math.sin(i * .9) * .35));
+    }
+    for (let a = 4.4; a < 8.15; a += .25) at(a, 0, t => bass(B, a < 6.4 ? 41 : 36, t, .14 + .05 * (a - 4.4) / 3.8));
+    [6.4, 6.9, 7.4, 7.65, 7.9, 8.025, 8.1].forEach((a, i) => at(a, 0, t => boom(B, t, .18 + i * .035, 125, 62, .45)));   // drums build
+    at(5.3, 2.9, (t, d) => sweep(B, t, d, 350, 7000, .16, 1.4, .5, true));             // riser into the hit
+    at(8.2, 0, t => { boom(B, t, .8, 64, 27, 2.8); crash(B, t, .11); });                // arrival hit
+    chord(8.2, 3.2, [38, 45, 50, 54, 57, 62, 66, 69], .2, 3400, 700);                  // D major
+    [86, 90, 93, 98].forEach((m, i) => at(8.24 + i * .09, 0, t => chime(B, m, t, .08, -.3 + .2 * i)));
+    at(9.4, 0, t => chime(B, 98, t, .05, .35));
+    return S;
+  }
+  /** Play the score from intro time `from` (skips what already passed; trims notes that are under way). */
+  function play(from) {
+    if (!on || !ctx || ctx.state !== 'running') return;
+    stop(.25);
+    const B = { dry: ctx.createGain(), wet: ctx.createGain() }; B.dry.connect(out); B.wet.connect(verb);
+    const base = ctx.currentTime + .05 - from;
+    for (const [a, d, fn] of score(B)) {
+      if (a >= from - .02) fn(base + a, d);
+      else if (d && a + d > from + .3) fn(base + from, a + d - from);
+    }
+    cur = { B, base, end: base + 14 };
+  }
+  function stop(fade = .4) {
+    if (!cur) return; const { B } = cur, t = ctx.currentTime; cur = null;
+    for (const g of [B.dry, B.wet]) { g.gain.cancelScheduledValues(t); g.gain.setValueAtTime(g.gain.value, t); g.gain.linearRampToValueAtTime(0, t + fade); }
+    setTimeout(() => { B.dry.disconnect(); B.wet.disconnect(); }, fade * 1000 + 200);
+  }
+  const playing = () => cur && ctx.currentTime < cur.end;
+  /** The audio just became allowed: start where the intro is now, or play the arrival hit. */
+  function sync() {
+    if (!on || playing()) return;
+    if (state.intro) play(Math.max(0, off()));
+    else if (sting || clockT - endAt < 1.5) play(8);
+    sting = false;
+  }
+  function pill() { $('#sndpill').classList.toggle('on', !!(on && state.intro && AC && (!ctx || ctx.state !== 'running'))); }
+  function unlock() { if (!on) return; init(); if (ctx && ctx.state !== 'running') ctx.resume().catch(() => {}); }
+  function button() { const b = document.querySelector('[data-toggle="sound"]'); if (b) { b.setAttribute('aria-pressed', on); b.hidden = !AC; } }
+  for (const ev of ['pointerdown', 'keydown', 'touchend']) addEventListener(ev, unlock, { capture: true, passive: true });
+  let an = null;
+  return {
+    /** Debug: audio state and the current peak level (window.__demo.MUSIC.level()). */
+    level() { if (!ctx) return { state: 'none' }; if (!an) { an = ctx.createAnalyser(); an.fftSize = 2048; out.connect(an); } const d = new Float32Array(2048); an.getFloatTimeDomainData(d); let pk = 0; for (const x of d) pk = Math.max(pk, Math.abs(x)); return { state: ctx.state, on, playing: !!playing(), t: cur ? +(ctx.currentTime - cur.base).toFixed(2) : null, peak: +pk.toFixed(3) }; },
+    boot() { button(); if (!on) return; init(); if (ctx.state === 'running') sync(); else ctx.resume().catch(() => {}); setTimeout(pill, 500); },
+    /** Skip / click during the intro: cut to the arrival hit. */
+    introEnd() { endAt = clockT; pill(); if (playing() && ctx.currentTime - cur.base < 7.7) play(8); },
+    replay() { pill(); if (on && ctx && ctx.state === 'running') play(0); },
+    toggle() {
+      on = !on; try { localStorage.setItem('pa-sound', on ? '1' : '0'); } catch (e) {}
+      button();
+      if (!on) stop(.35);
+      else { init(); if (ctx.state === 'running') play(state.intro ? Math.max(0, off()) : 8); else { sting = true; ctx.resume().catch(() => {}); } }
+      pill();
+    },
+  };
+})();
+$('#sndpill').addEventListener('click', e => { e.stopPropagation(); });
 /** Intro logo, timed like the video: pieces from frame 4, "Parque" rises at frame 30, "Arauco" 6 frames later. */
 function introTitle() { playMark($('#intro .pamark')); playWord($('#intro .pawm'), (30 - 4) / 30); const pw = $('#intro .pow'); pw.classList.remove('on'); setTimeout(() => pw.classList.add('on'), 1900); }
 function endIntro() {
@@ -2179,6 +2331,7 @@ function endIntro() {
   for (const F of floors) F.introDone = true;
   setTimeout(() => playMark(document.querySelector('#brand .mk svg')), 450);
   const veil = $('#veil'); if (veil) veil.classList.add('gone');
+  MUSIC.introEnd();
   if (!state.tour) { const [p, t] = overviewCam(); if (!camTween || camTween.p1.distanceTo(p) < 1) flyTo(p, t, camTween ? Math.max(1.2, camTween.dur - (clockT - camTween.start)) : 1.4, .04); }
   refreshNav();
 }
@@ -2191,7 +2344,7 @@ function replayIntro() {
   if (floors[3].logo) floors[3].logo.t0 = -1;
   for (const c of clouds.list) c.sp.position.x = c.x0;
   clouds.k = 1; clouds.group.visible = !REDUCED;
-  $('#intro').classList.remove('gone'); introTitle();
+  $('#intro').classList.remove('gone'); introTitle(); MUSIC.replay();
   document.body.classList.add('cine');
   camera.position.copy(INTRO_FROM); controls.target.copy(INTRO_LOOK); camera.lookAt(INTRO_LOOK);
   const [p, t] = overviewCam(); flyTo(p, t, REDUCED ? .01 : INTRO_DUR, 0); refreshNav();
@@ -2381,9 +2534,10 @@ $('#loading').classList.add('gone');
 setTimeout(() => { if (state.intro) introTitle(); }, 380); // start the logo once the loading screen has faded
 document.body.classList.add('cine');
 introStart = 0; clockT = 0;
+MUSIC.boot();
 { const [p, t] = overviewCam(); camera.position.copy(INTRO_FROM); controls.target.copy(INTRO_LOOK); camera.lookAt(controls.target); flyTo(p, t, REDUCED ? .01 : INTRO_DUR, 0); }
 refreshNav();
-window.__demo = { camera, controls, state, floors, sections, sensors, goFloor, goSection, goOverview, startTour, stopTour, toggle, endIntro, setLang, replayIntro, renderer, composer, bloom, sun, scene, Q, GPU_NAME };
+window.__demo = { camera, controls, state, floors, sections, sensors, goFloor, goSection, goOverview, startTour, stopTour, toggle, endIntro, setLang, replayIntro, MUSIC, renderer, composer, bloom, sun, scene, Q, GPU_NAME };
 requestAnimationFrame(frame);
 </script>
 </body>
